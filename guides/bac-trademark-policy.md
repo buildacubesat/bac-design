@@ -1,6 +1,6 @@
 # BAC Trademark Policy
 
-**Build a CubeSat – use of the BAC name and marks** Version 1.0, 2026-10-27
+**Build a CubeSat – use of the BAC name and marks** Version 1.1, 2026-10-27
 
 **Trademark holder:** nihil.space GmbH, Bern, Switzerland  
 **Contact for permissions:** hello@buildacubesat.space
@@ -18,7 +18,7 @@ At the same time, the Build a CubeSat name and visual identity help the public d
 This policy covers the following identifiers when used to identify the Build a CubeSat project, its activities, or its products (together, the **BAC Marks**):
 
 - The name **Build a CubeSat** and the abbreviation **BAC**;
-- The official Build a CubeSat logo – the isometric cube mark, the uppercase wordmark, and the stacked lockup of the two, as described in the BAC Identity Guide §8 – together with its symbols and recognizable variants;
+- The official Build a CubeSat marks – the isometric cube symbol, the uppercase wordmark, and the logo, the horizontal lockup of the two, as described in the BAC Identity Guide §8 – together with their recognizable variants;
 - Other brand assets explicitly identified as official BAC marks in the project's published brand materials.
 
 This policy does not claim exclusive rights over ordinary descriptive uses of the words "build a CubeSat" or over unrelated uses of the letters "BAC". The scope of legal protection depends on applicable law and any registrations.
@@ -33,7 +33,7 @@ The project's hardware, software, and documentation remain governed by their res
 
 Unless explicitly stated otherwise for an individual asset, the BAC Marks and their artwork are **excluded from those open-source and Creative Commons license grants**, including where they appear inside an openly licensed repository, document or design file. Copyright in the original logo artwork is reserved by nihil.space GmbH. The BAC Marks may be used only as described in this policy, under a separate written permission, or as otherwise permitted by applicable law.
 
-The BAC guides describe the marks so that BAC and its permitted users reproduce them correctly; publishing that description under CC BY-SA 4.0 does not license the marks. The design tokens – colours, type choices, spacing – are openly licensed (MIT or CC BY-SA 4.0) and are not BAC Marks on their own; combining them with the BAC name or logo is covered by this policy.
+The BAC guides describe the marks, and bac-design `assets/` holds the official files, so that BAC and its permitted users reproduce them correctly; publishing that description under CC BY-SA 4.0 does not license the marks. The design tokens – colours, type choices, spacing – are openly licensed (MIT or CC BY-SA 4.0) and are not BAC Marks on their own; combining them with the BAC name or logo is covered by this policy.
 
 Nothing in this policy restricts the freedoms granted by the licenses for the underlying hardware, software, or documentation. In particular, an independently manufactured or modified BAC-derived design does not need BAC trademark permission merely to exist, be distributed, or be sold under its own branding.
 
@@ -107,4 +107,5 @@ The BAC governance guides are independently versioned; this policy joins them at
 
 | **Version** | **Date** | **Change** |
 |----|----|----|
+| 1.1 | 2026-10-27 | §2: the marks named as the Identity Guide 1.1 and the asset files do – symbol, wordmark and logo (the horizontal lockup); no stacked lockup. §3: the official files in bac-design `assets/`. |
 | 1.0 | 2026-10-27 | First version, drafted by Mänu: the BAC Marks (name, abbreviation, cube mark, wordmark and lockup) excluded from the CERN OHL-S 2.0, MIT and CC BY-SA 4.0 grants; uses allowed without permission, uses needing written permission, uses not permitted; guidance for independent manufacturers; logo presentation; nihil.space GmbH as trademark holder, hello@buildacubesat.space for requests. Referenced from the Identity Guide 1.0, the Interface Design Guide 1.0 and the Project & Tooling Guide 0.15. |

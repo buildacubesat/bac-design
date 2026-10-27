@@ -1,6 +1,6 @@
 # BAC Identity Guide
 
-**Build a CubeSat – Brand, visual & communication standard** Version 1.0, 2026-10-27
+**Build a CubeSat – Brand, visual & communication standard** Version 1.1, 2026-10-27
 
 > **Space is for everyone.** This guide is the authoritative source for the Build a CubeSat (BAC) identity: brand usage, voice and tone, typography, colour, form, imagery, graphic language, and the Ops/Mission communication modes. It is written so a human or an LLM can reproduce BAC's identity without a visual reference.
 >
@@ -80,7 +80,7 @@ Three families, each with one job. No serifs anywhere.
 
 | **Role** | **Family** | **Token** | **Used for** |
 |----|----|----|----|
-| Wordmark | **Nunito** (rounded humanist), uppercase | --font-logo | The logo/wordmark **only** |
+| Wordmark | **Nunito** (rounded humanist) at weight 350, uppercase | --font-logo | The logo/wordmark **only**, and only as the outlined files in bac-design `assets/` (§8) |
 | Headings | **Nunito Sans** 500 | --font-display, --fw-heading | UI and document headings, display type |
 | Body | **Nunito Sans** 400 | --font-body | Prose, descriptions, table text, marketing copy |
 | Mono | **IBM Plex Mono** 400/500 | --font-mono | Labels, eyebrows, chips, button labels, figures, units, identifiers, timestamps, code |
@@ -128,10 +128,10 @@ Three families, each with one job. No serifs anywhere.
 }
 ```
 
-Fonts load from Google Fonts (cached offline after first load); surfaces that must work offline self-host the same files:
+Fonts load from Google Fonts (cached offline after first load); surfaces that must work offline self-host the same files from bac-design `fonts/` (variable Nunito and Nunito Sans, the five static IBM Plex Mono faces, OFL 1.1). The wordmark's weight 350 is served by the variable file only, so it is included in the import for completeness and the wordmark is never set live:
 
 ```css
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@350;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;1,6..12,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 ```
@@ -347,7 +347,13 @@ Product sheets are a print-first surface, so treat paper as the primary target:
 
 - **Semantic symbols** (text, not icons): ✓ pass, ✗ fail, ! warn, → progression, , or · separator. Their interface semantics are defined in the BAC Interface Design Guide.
 
-- **Brand mark:** the **Build a CubeSat Symbol v4r1** – an isometric 2U cube: a rounded hexagonal outline, the three internal edges meeting at centre, a filled dot on the top face, stroke 15 on a 400×650 grid; drawn in currentColor (or supplied as the black and white files) so it follows the theme. Black and white only, never recoloured. Stacked lockup pairs the mark with the uppercase Nunito wordmark. The mark, the wordmark and the lockup are BAC Marks under the BAC Trademark Policy and are excluded from the open licences; this description exists so they are reproduced correctly, not as a licence. Colours and type tokens are not marks on their own.
+- **Brand marks, v4r1.** Three marks, versioned together like hardware (`v<version>r<revision>`, Project & Tooling Guide §2.2) and supplied as black, white and `currentColor` SVG in bac-design `assets/`; written by `bac-brand-assets` in bac-utils from the construction below, never edited by hand. Black and white only, never recoloured; `currentColor` is for inlining in HTML, where the mark takes the colour of its text.
+
+  - **Symbol** – an isometric 2U cube: a 1 × 1 × 2 box in true 30° projection, cube edge 200 on a 400 × 650 canvas (346.41 wide, 600 tall, centred). One hexagonal outline with its six corners rounded 5 from the vertex; the inner edges – the top face's lower edges, the centre vertical, the lower cube's top face – as a second path; a filled dot at the centre of the top face, an ellipse 60 × 34.64 (the 1:√3 ratio of a circle in isometric projection). Stroke 15, round joins and caps, no fill.
+  - **Wordmark** – BUILD A over CUBESAT in Nunito 350, uppercase, tracking −0.03 em, cap height 100 and 150 from baseline to baseline, the first line justified to the width of the second; outlined, so the files carry no font.
+  - **Logo** – the horizontal lockup: the symbol on its canvas, the wordmark 70 to its right, scaled so its two-line block is 70 % of the cube height and centred on the cube. There is no stacked lockup.
+
+  The symbol, the wordmark and the logo are BAC Marks under the BAC Trademark Policy and are excluded from the open licences; this description exists so they are reproduced correctly, not as a licence. Colours and type tokens are not marks on their own.
 
 - **No emoji. No hand-drawn illustration in UI.**
 
@@ -401,9 +407,9 @@ Current exemplar families include:
 
 - **BAC Ground is the reference, not a dependency.** Where the console and this guide differ (for example the console's DM Sans / Roboto Mono, 400-weight headings and neutral \#1F1F1F dark background), this guide wins; the console syncs to the generated tokens.
 
-- Fonts load from Google Fonts CDN or are self-hosted as the same files where a surface must work offline. Moon 2.0 is retired.
+- Fonts load from Google Fonts CDN or are self-hosted from bac-design `fonts/` where a surface must work offline. Moon 2.0 is retired.
 
-- The official cube mark is the Build a CubeSat Symbol v4r1 (`bac-symbol-black-v4r1.svg`, nihil.space GmbH); the reference gallery ships it as `assets/bac-symbol.svg`. Official hardware photography should replace the illustrative renders when available.
+- The official marks are the v4r1 files in bac-design `assets/` (`bac-symbol-*-v4r1.svg`, `bac-wordmark-*-v4r1.svg`, `bac-logo-*-v4r1.svg`, nihil.space GmbH); the reference gallery ships the symbol as `assets/bac-symbol.svg`. Official hardware photography should replace the illustrative renders when available.
 
 ## 11. Quick reference – the non-negotiables
 
@@ -443,6 +449,7 @@ The BAC governance guides are independently versioned. Product and subsystem doc
 
 | **Version** | **Date** | **Change** |
 |------------|-------------|-----------------------------------------------------------------|
+| 1.1 | 2026-10-27 | §8: the marks at v4r1 – the symbol's construction (true 30° isometric 2U cube, edge 200, stroke 15, corners rounded 5, the dot 60 × 34.64 on a 400 × 650 canvas), the wordmark in Nunito 350 with −0.03 em tracking, the logo as the horizontal lockup at 70 % of the cube height and gap 70; black, white and `currentColor` files in bac-design `assets/`, written by `bac-brand-assets`; no stacked lockup. §3: the wordmark weight, 350 added to the Nunito import, the self-hosted fonts in bac-design `fonts/`. §10: the file names. |
 | 1.0 | 2026-10-27 | Rebased on the BAC Ground console language, with Mänu as design owner (decided 2026-10-24 to 2026-10-27). §0: the language summary rewritten. §1: BAC Ground and the notebooks as surfaces. §3: Nunito Sans 500 headings and Nunito Sans 400 body; IBM Plex Mono for labels, figures and code only, with 0.03em label tracking (--ls-label); --fw-heading; --lh-normal 1.45; Space Mono dropped as a future option. §4: the console status set with fill/ink split (green \#3FB950, caution \#F7D400, alarm \#E94538, info \#004C8B); \#4277FD retired, blue means info, links and focus; yellow is caution only in dark mode; the nebula palette redone as a triad – Orbital Teal \#0E9594, Ion Violet \#7A5AF8, Plasma Rose \#C64677 with inks, on-dark shades and tints – retiring Orbital Cyan, Ion Blue, Solar Copper, Deep Field Violet and Nebula Ember; the warm ramp replaced by the console's neutral ramp (--neutral-\*); light --bg \#F9F9F9, dark --bg \#1F1E1D with derived surfaces, wells lighter than --bg in dark; new --btn-primary-\*, --accent-state, --hero-\* and --kicker tokens; Plasma Rose takes copper's Mission job and disclaimers get a neutral outline (§4.5). §5: containers 1200px and 1540px (--container-wide); radii 6px/10px plus pill controls; no shadows. §6: the hero card and its decorative red rule. §7: Mission paper \#F4F1EA; the viewport lit in teal and violet; --mission-card-shadow removed. §8: Lucide embedded inline, 18px icon buttons, Tabler as fallback, status shapes are not icons. §9: BAC Ground as reference implementation; tokens.json in bac-utils as the executable token source with generated copies, MIT or CC BY-SA 4.0. §11: the non-negotiables rewritten. §1, §8, §9, §11: the BAC name, abbreviation, cube mark, wordmark and lockup are BAC Marks, excluded from the open licences and governed by the new BAC Trademark Policy 1.0. |
 | 0.9 | 2026-10-24 | §4.4: --text-muted and --link moved to WCAG AA values (#6C6B67/#A3A29C, \#2F5FD6/#7BA0FE), the focus ring split into its own --focus-ring row at the plain accent, the measured ratios recorded; derived inks for text on status tints and on Mission paper. §9: the gallery's home in bac-utils, tokens.css as the executable token copy, the stylesheets' MIT or CC BY-SA 4.0 dual license (decided 2026-10-08 and 2026-10-09). |
 | 0.8 | 2026-08-11 | Added the **BAC Reference Gallery** as the companion visual exemplar set. Established HTML/CSS/SVG as the canonical exemplar source with PNG/PDF as generated exports; clarified that exemplars demonstrate rather than prescribe layouts and must not be treated as sources of live project data; expanded the product-sheet reference guidance; and replaced the stray ⚠ disclaimer example with the approved ! glyph. |
