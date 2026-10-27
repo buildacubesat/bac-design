@@ -24,7 +24,7 @@ A change of meaning – a new rule, a retired token – is made here first; the 
 
 ## 3. Brand assets
 
-`assets/` holds the official Build a CubeSat symbol, wordmark and logo at v4r1, as black, white and `currentColor` SVG; [`assets/README.md`](assets/README.md) lists the files and their construction. They are BAC Marks under the Trademark Policy and are not covered by this repository's licence. The files are written by [`bac-brand-assets`](https://github.com/buildacubesat/bac-utils/tree/main/tools/bac-brand-assets) in bac-utils from the construction the Identity Guide §8 states, never edited by hand.
+`assets/` holds the official Build a CubeSat symbol, wordmark and logo at v4r1 (plus the logo with tagline and the badges) and the Rocinante marks at v2r1, as black, white and `currentColor` SVG; [`assets/README.md`](assets/README.md) lists the files and their construction. They are BAC Marks under the Trademark Policy and are not covered by this repository's licence. The files are written by [`bac-brand-assets`](https://github.com/buildacubesat/bac-utils/tree/main/tools/bac-brand-assets) in bac-utils from the construction the Identity Guide §8 states, never edited by hand.
 
 `fonts/` holds the self-hosted copies of the three families (Nunito, Nunito Sans, IBM Plex Mono; OFL 1.1) that offline surfaces and the tools use; see [`fonts/README.md`](fonts/README.md).
 
@@ -36,5 +36,5 @@ The guides and this README are licensed CC BY-SA 4.0. The Build a CubeSat name, 
 
 | Version | Date | Change |
 | :-- | :-- | :-- |
-| 1.1.0 | 2026-10-27 | The marks: `assets/` with the symbol, wordmark and logo at v4r1 (black, white, `currentColor`), written by `bac-brand-assets`; `fonts/` with the self-hosted Nunito, Nunito Sans and IBM Plex Mono. Identity Guide 1.1 (§8 construction of the marks, §3 wordmark weight and fonts) and Trademark Policy 1.1 (symbol, wordmark, logo). |
+| 1.1.0 | 2026-10-27 | The marks: `assets/` with the symbol, wordmark and logo at v4r1 (black, white, `currentColor`), the logo with tagline, the badges and the Rocinante marks at v2r1, written by `bac-brand-assets`; `fonts/` with the self-hosted Nunito, Nunito Sans and IBM Plex Mono. Identity Guide 1.1 (§8 construction of the marks, §3 wordmark weight and fonts) and Trademark Policy 1.1 (symbol, wordmark, logo). |
 | 1.0.0 | 2026-10-27 | First release: the five guides moved out of Google Drive at Identity 1.0, Interface Design 1.0, Project & Tooling 0.15 and Trademark Policy 1.0, with PDF exports. |
