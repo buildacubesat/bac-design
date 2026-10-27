@@ -1,0 +1,6 @@
+# bac-design
+.DS_Store
+*~
+.backup/
+.intake/
+.claude/
