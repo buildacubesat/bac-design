@@ -1,3 +1,7 @@
+# BAC Video Release Checklist
+
+The steps for releasing a YouTube devlog episode. Git is this checklist's history.
+
 Pre Release
 
 Verify
