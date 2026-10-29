@@ -1,81 +1,80 @@
-# Rocinante / Roci ''� Software Stack Naming Note
+# Rocinante / Roci – Software Stack Naming Note
 
-**Build a CubeSat ''� Internal Documentation** Version 0.1, 2026-07-14
+**Build a CubeSat – flight software naming convention** Version 0.2, 2026-10-29
 
-This note documents the naming and branding convention for **Rocinante**, the product identity of BAC's flight software stack. It follows the Internal Tools Design Language Guide (v0.10) for naming, glyph, and versioning conventions, and should be read alongside that guide and the bac-software repo restructure issue.
+This note documents the naming convention for **Rocinante**, the product identity of BAC's flight software stack. It applies the naming, versioning and glyph conventions of the BAC Project & Tooling Guide (§2.2, §2.3, §2.6) and the voice of the BAC Identity Guide (§2); the Rocinante marks are defined in the Identity Guide §8 and covered by the BAC Trademark Policy §2. The guides live in bac-design (https://github.com/buildacubesat/bac-design).
 
-## 1. What Rocinante is
+## 1. What Rocinante Is
 
-Rocinante is the name of the software stack spanning both segments of BAC's onboard computing:
+Rocinante is the name of the software stack running on BAC's onboard computers. It spans the three node classes of the BAC Project Overview §5.2:
 
-- **Flight segment** ''� Zephyr RTOS running on STM32F405 MCU nodes (EPS board and others).
+- **Small nodes** – Zephyr RTOS on small, energy-efficient MCUs for deterministic subsystem control: always-on nodes such as the EPS MCU, and sensor heads.
 
-- **SBC segment** ''� NASA F Prime running on Yocto Linux, on a Raspberry Pi CM5.
+- **Medium nodes** – Zephyr and NASA F Prime on larger MCUs for more demanding flight tasks such as FDIR and COMMS.
 
-libcsp bridges the two segments; Yamcs handles the ground side and is out of scope for this naming note.
+- **Large nodes** – Linux and NASA F Prime on higher-capability compute hardware such as the Raspberry Pi CM5; payload nodes.
 
-Rocinante is a **product identity**, not a repository name. It names the stack as a coherent thing a contributor or user can refer to ''� "the Rocinante stack handles X" ''� independent of where the code physically lives.
+The MicroMod carrier serves small and medium nodes, the CM5 carrier large nodes. STM32F405 processor boards are supported first, STM32U5 later. Nodes talk through a shared protocol boundary – CSP over CAN – rather than running one framework everywhere. The ground segment is out of scope for this note.
 
-## 2. Naming rule
+Rocinante is a **product identity**, not a repository name. It names the stack as a coherent thing a contributor or user can refer to – "the Rocinante stack handles X" – independent of where the code lives.
 
-| **Context**                                              | **Form**                 |
-|----------------------------------------------------------|--------------------------|
-| First mention in a document or conversation              | **Rocinante**            |
-| Subsequent mentions in the same document or conversation | **Roci**                 |
-| Code namespace prefix                                    | lowercase roci or roci\_ |
+## 2. Naming Rule
 
-This mirrors how **Build a CubeSat** shortens to **BAC** after first reference, and how bac is used as a lowercase code/filename prefix (Internal Tools Design Language Guide §2.3). Mixed case (Roci\_, ROCI, rOci) is never acceptable, consistent with the guide's blanket rule against mixed case in code and filenames.
+| **Context**                                              | **Form**                |
+|----------------------------------------------------------|-------------------------|
+| First mention in a document or conversation              | **Rocinante**           |
+| Subsequent mentions in the same document or conversation | **Roci**                |
+| C and C++ identifiers, files, modules                    | lowercase roci\_ prefix |
+| Kconfig symbols                                          | CONFIG_ROCI\_\*         |
+| F Prime namespace                                        | Roci                    |
+
+This mirrors how **Build a CubeSat** shortens to **BAC** after first reference, and how bac is used as a lowercase code and file name prefix (Project & Tooling Guide §2.3). Where a language or framework fixes the casing – uppercase Kconfig symbols, PascalCase F Prime namespaces – the prefix follows it. Within one identifier the casing is never mixed, and prose never writes Roci\_, rOci or ROCI.
 
 **Examples:**
 
-- Prose, first mention: *"The EPS node runs on Rocinante's flight segment."*
+- Prose, first mention: *"The EPS node runs Rocinante on a small node."*
 
-- Prose, thereafter: *"Roci handles telecommanding through libcsp."*
+- Prose, thereafter: *"Roci handles telecommanding over CSP."*
 
-- Code: roci_eps, roci_hk_collector, roci::topology (namespace-appropriate casing per language convention, but the prefix itself is always lowercase roci).
+- Code: roci_eps, roci_hk_collector, CONFIG_ROCI_HEARTBEAT, Roci::Topology.
 
-- Commit / PR titles: treat as a proper noun, capitalized normally in a sentence ''� *"Add Roci telemetry rate group for BNO086."*
+- Commit and PR titles: treat as a proper noun, capitalized normally in a sentence – *"Add Roci telemetry rate group for BNO086."*
 
 ## 3. Relationship to bac-software
 
-Rocinante is **not** a repo rename ''� at least not yet. This is an open question currently being worked through as part of the bac-software restructure issue that Gui is leading, which also covers:
+Rocinante is not a repository rename. The question is settled by the bac-software docs split (bac-software #105):
 
-- Whether the small/medium/large node concept from BAC's video content maps cleanly onto the flight-segment/SBC split.
+- **Repository:** bac-software keeps its name (Project & Tooling Guide §2.8).
 
-- Whether the repo is renamed to reflect Rocinante externally, or keeps bac-software as its Codeberg name while Rocinante remains the internal product identity used in namespaces and documentation.
+- **Product identity inside the repository:** Rocinante / Roci, in namespaces, documentation headers and prose.
 
-Until that's resolved, the working assumption is:
+- **Document IDs** stay BAC-FSW-\* and BAC-SBC-\*, with their own version numbers (Project & Tooling Guide §2.2).
 
-- **Repo name:** bac-software (unchanged, per the Internal Tools Design Language Guide §2.11 repo table).
+- **New code** uses the roci\_ prefix, CONFIG_ROCI\_\* and the Roci F Prime namespace. Existing bac\_ identifiers are renamed in a retrofit tracked as its own issue, not in passing.
 
-- **Product identity inside the repo:** Rocinante / Roci, in namespaces, documentation headers, and prose.
-
-This note should be updated once the restructure issue lands on a final answer.
-
-## 4. Where this applies
+## 4. Where This Applies
 
 - bac-docs documentation covering the flight software stack.
 
-- Code comments, namespaces, and module names within bac-software.
+- Code comments, namespaces and module names within bac-software.
 
-- Codeberg issue and PR titles/descriptions referring to the stack as a whole.
+- Codeberg issue and PR titles and descriptions referring to the stack as a whole.
 
-- Discord and other community communications, following the project's normal warm/direct tone (Internal Tools Design Language Guide §2.3, Design System Specification §2).
+- Discord and other community communication, in the project's plain-spoken voice (Identity Guide §2).
 
 It does **not** apply to:
 
-- The bac-hardware or bac-structure repos, which are not part of the software stack.
+- bac-hardware or bac-structure, which are not part of the software stack.
 
-- Yamcs (ground segment) or libcsp (third-party bridge library), which keep their own upstream names.
+- Third-party components – Zephyr, F Prime, libcsp, the ground segment software – which keep their upstream names.
 
-## 5. Open questions
+## 5. Marks
 
-- Repo naming (see §3) ''� pending the restructure issue.
+Rocinante has its own marks at v2r1 – the horse head in a ring, the ROCINANTE wordmark over CUBESAT SOFTWARE STACK, and their stacked lockup – in bac-design `assets/` (`rocinante-*`), constructed as the Identity Guide §8 describes. They are BAC Marks under the BAC Trademark Policy and are not covered by the open licenses.
 
-- Whether Rocinante gets its own logo/wordmark treatment, or stays a text-only product name nested under the BAC brand. No decision yet; default to text-only until specified.
+## 6. Version History
 
-## 6. Version history
-
-| **Version** | **Date**   | **Change**                                                                                                   |
-|-------------|------------|--------------------------------------------------------------------------------------------------------------|
+| **Version** | **Date**   | **Change** |
+|-------------|------------|------------|
+| 0.2         | 2026-10-29 | Moved from Google Drive into bac-design `guides/`. §1: the three node classes replace the flight and SBC segments; MicroMod and CM5 carriers; STM32F405 first, STM32U5 later; CSP over CAN. §2: CONFIG_ROCI\_\* and the Roci F Prime namespace. §3: settled by bac-software #105 – the repository stays bac-software, document IDs stay BAC-FSW-\* and BAC-SBC-\*, the bac\_ retrofit as its own issue. §5: the Rocinante marks, replacing the open question on a logo. References to the current guide names. Title Case headings, American spelling. |
 | 0.1         | 2026-07-14 | Initial note. Documented Rocinante/Roci naming rule, relationship to bac-software, and scope of application. |
