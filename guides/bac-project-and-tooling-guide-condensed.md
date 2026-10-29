@@ -4,7 +4,7 @@
 
 ## Project-Wide
 
-- License: software MIT; pyproject.toml has license = { text = "MIT" }. Hardware CERN OHL-S 2.0, mechanical parts and bac-structure included. Docs CC BY-SA 4.0, except READMEs and instructions that belong to a design, which follow its repository. Copyright line: Copyright (c) \<years\> nihil.space GmbH and Build a CubeSat contributors on the Codeberg repositories; the GitHub repositories keep their nihil.space GmbH line.
+- License: software MIT; pyproject.toml has license = { text = "MIT" }. Hardware CERN OHL-S 2.0, mechanical parts and bac-structure included. Docs CC BY-SA 4.0, except READMEs and instructions that belong to a design, which follow its repository. Copyright line: Copyright (c) \<years\> nihil.space GmbH and Build a CubeSat contributors on the open Codeberg repositories; the GitHub repositories keep their nihil.space GmbH line; bac-ops (private) is all rights reserved.
 
 - Legal entity: nihil.space GmbH only; never the LLC.
 - Brand marks (name, BAC, cube mark, wordmark, lockup) are not openly licensed: BAC Trademark Policy. A repository that ships logo artwork says so in its README's license section.

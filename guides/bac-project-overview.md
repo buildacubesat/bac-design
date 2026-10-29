@@ -2,7 +2,7 @@
 
 **Build a CubeSat – Consolidated project reference** Version 0.4, 2026-10-29
 
-> **Space is for everyone.** This document is the durable orientation reference for Build a CubeSat (BAC): what the project is, why it exists, how its major parts fit together, how it relates to nihil.space, and where authoritative detail lives.
+> **Space for everyone.** This document is the durable orientation reference for Build a CubeSat (BAC): what the project is, why it exists, how its major parts fit together, how it relates to nihil.space, and where authoritative detail lives.
 
 ## 0. Authority and Scope
 
@@ -52,7 +52,7 @@ The long-term objective is not merely to produce a kit. It is to build an open s
 
 ## 3. Project Principles
 
-### 3.1 Space Is for Everyone
+### 3.1 Space for Everyone
 
 BAC treats access to space technology as a participation problem as much as a technical one. The intended audience includes people who may not begin with institutional funding, aerospace credentials or access to proprietary spacecraft platforms.
 
@@ -305,7 +305,7 @@ That is the durable roadmap.
 
 | **Version** | **Date**   | **Change**                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 |-------------|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 0.4         | 2026-10-29 | Moved from Google Drive into bac-design `guides/`. §0: the Trademark Policy and the Rocinante naming note among the guides, which live in bac-design. §1, §10: nihil.space GmbH as the legal entity. §5.1: the MicroMod carrier serves small and medium nodes. §8: mechanical parts under CERN OHL-S 2.0, documentation follows the design it describes, the marks excluded, the bac-structure relicense. §13: the docs site, the Trademark Policy and the naming note. Headings to Title Case and American spelling throughout. |
+| 0.4         | 2026-10-29 | Moved from Google Drive into bac-design `guides/`. The slogan shortened to "Space for everyone". §0: the Trademark Policy and the Rocinante naming note among the guides, which live in bac-design. §1, §10: nihil.space GmbH as the legal entity. §5.1: the MicroMod carrier serves small and medium nodes. §8: mechanical parts under CERN OHL-S 2.0, documentation follows the design it describes, the marks excluded, the bac-structure relicense. §13: the docs site, the Trademark Policy and the naming note. Headings to Title Case and American spelling throughout. |
 | 0.3         | 2026-08-10 | Rewritten as a durable project overview rather than a consolidated status dump. Removed firm future dates, volatile release/commercial details, repository statistics, personal finance, contributor rosters, implementation-level factoids and the large conflict/TODO register. Reframed the roadmap as capability gates and program goals. Updated authority references to the BAC Identity Guide, BAC Interface Design Guide and BAC Project & Tooling Guide. |
 | 0.2         | 2026-07-23 | Consolidated corporate and project context and reconciled several source conflicts.                                                                                                                                                                                                                                                                                                                                                                                 |
 | 0.1         | 2026-07-23 | Initial compilation from prior project summaries and working references.                                                                                                                                                                                                                                                                                                                                                                                            |
