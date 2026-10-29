@@ -1,6 +1,6 @@
 # BAC Project & Tooling Guide
 
-**Build a CubeSat – project, software and tooling standard.** Version 0.15, 2026-10-27
+**Build a CubeSat – project, software and tooling standard.** Version 0.16, 2026-10-29
 
 This document defines engineering, software, repository, data, and implementation conventions used across the BAC project. It is the primary reference for LLMs and human contributors when creating or updating project tooling and technical workflows. The goal is consistency, not uniformity – each tool context has its own implementation constraints, but project conventions remain predictable and maintainable.
 
@@ -28,12 +28,20 @@ Every BAC artifact is licensed as follows. Do not deviate.
 
 | **Artifact type**                              | **License**    |
 |------------------------------------------------|----------------|
-| Hardware (schematics, PCB layouts, mechanical) | CERN OHL-S 2.0 |
+| Hardware: schematics, PCB layouts, mechanical parts (bac-hardware, bac-structure) | CERN OHL-S 2.0 |
 | Software                                       | MIT License    |
 | Documentation                                  | CC BY-SA 4.0   |
 | Brand marks (name, logo, wordmark, lockup)     | Not openly licensed – BAC Trademark Policy |
 
-The BAC Marks – the name Build a CubeSat, the abbreviation BAC, the cube mark, the wordmark and their lockup – are excluded from all three licences, also where they appear inside an openly licensed repository or file; their use by others follows the BAC Trademark Policy (https://github.com/buildacubesat/bac-design/blob/main/guides/bac-trademark-policy.md; nihil.space GmbH, hello@buildacubesat.space). A repository that ships logo artwork says so in its README's licence section: "The Build a CubeSat name and logo are not covered by this repository's licences; see the BAC Trademark Policy."
+The BAC Marks – the name Build a CubeSat, the abbreviation BAC, the cube mark, the wordmark and their lockup – are excluded from all three licenses, also where they appear inside an openly licensed repository or file; their use by others follows the BAC Trademark Policy (https://github.com/buildacubesat/bac-design/blob/main/guides/bac-trademark-policy.md; nihil.space GmbH, hello@buildacubesat.space). A repository that ships logo artwork says so in its README's license section: "The Build a CubeSat name and logo are not covered by this repository's licenses; see the BAC Trademark Policy."
+
+Documentation follows what it describes (decided 2026-10-29). A README, release note or instruction file that belongs to a design – a board, a part, a tool – travels with the design under its repository's license: a board README in bac-hardware is CERN OHL-S 2.0, a tool README in bac-utils is MIT. Standalone prose – bac-docs, the guides, the engineering documents in bac-software (BAC-FSW-\*, BAC-SBC-\*) – is CC BY-SA 4.0. A repository that holds both states the split once in its README and carries both license texts; bac-software keeps LICENSE (MIT) and adds LICENSE-CC-BY-SA-4.0.
+
+Older releases keep the license they were published under unless they have been explicitly relicensed; the license a release declares is authoritative. bac-hardware carries only the CERN OHL-S 2.0 text, because boards released under CC BY-SA 4.0 leave the repository with the yearly January archive; a board still in the repository under CC BY-SA 4.0 says so in its README. bac-structure was relicensed as a whole on 2026-10-24: every structure release, including those first published under CC BY-SA 4.0, is CERN OHL-S 2.0, which is possible because no one outside nihil.space GmbH holds copyright in a structure design. Copies downloaded before then stay usable under CC BY-SA 4.0.
+
+The copyright holders are named as Copyright (c) \<years\> nihil.space GmbH and Build a CubeSat contributors (decided 2026-10-29), where \<years\> runs from the repository's first publication to its latest change, for example 2024–2026. bac-software carries the line in its MIT LICENSE, where the license text has a place for it; bac-hardware, bac-structure and bac-docs carry it in their README's license section, because the CERN OHL-S and CC BY-SA texts have none. bac-design keeps its own line.
+
+Every board carries its bac.page link – on the silkscreen and in its schematic, layout, README and release. That link is the Source Location that CERN OHL-S 2.0 asks for when hardware is conveyed as a product, so a new design gets its link before its first release (hardware release checklist, step 11).
 
 Include the appropriate SPDX identifier in every pyproject.toml:
 
@@ -51,9 +59,11 @@ Examples: v1r2, v3r4.1, v2r2.1-flight. The version increments on significant red
 
 Software uses [<u>Semantic Versioning 2.0.0</u>](https://semver.org/): MAJOR.MINOR.PATCH, for example 1.2.3. In pyproject.toml and --version output, prefix with v: v1.2.3.
 
-Git tags mark a tool version only where another repository pins it: \<tool\>-v\<X.Y.Z\> on the commit that produced the pinned output, for example bac-antenna-optimizer-v0.7.3, which bac-hardware's antenna.toml names. Branches merge into main by fast-forward, never squashed, so a tag stays on main's history.
+Git tags mark a tool version only where another repository pins it: \<tool\>-v\<X.Y.Z\> on the commit that produced the pinned output, for example bac-antenna-optimizer-v0.7.3, which bac-hardware's antenna.toml names.
 
-Product, subsystem, and software documentation documents another part of the project and references that part's versioning scheme. The document title names the subject and its version; these docs do not carry a separate document version number. Examples: EPS v2r4 Readme, bac-kicad-generate-artifacts v0.3.1 User Guide.
+Branches merge into main with a merge commit, git merge --no-ff (decided 2026-10-29). They are never squashed, and a branch that carries a release tag is never rebased, because both would leave the tag on a commit that is not on main. The merge message lists what the branch releases, for example every board in a hardware batch. A fast-forward is acceptable only where nothing on the branch is tagged and main has not moved. The pull-request settings on Codeberg and GitHub offer the merge commit only.
+
+Product, subsystem, and software documentation documents another part of the project and references that part's versioning scheme. The document title names the subject and its version; these docs do not carry a separate document version number. Examples: EPS v2r4 Readme, bac-kicad-generate-artifacts v0.3.1 User Guide. The engineering documents in bac-software (BAC-FSW-\*, BAC-SBC-\*) differ: they are documents in their own right and keep their own IDs and version numbers (decided 2026-10-24), for example BAC-FSW-SUM-001 v0.2.0.
 
 Governance documents and standards are the exception. The BAC Identity Guide, BAC Interface Design Guide, BAC Project & Tooling Guide, and comparable project-wide standards are independently versioned because they govern multiple artifacts rather than documenting one versioned subject. Their version increments on substantive changes and each carries its own version history.
 
@@ -69,7 +79,7 @@ Governance documents and standards are the exception. The BAC Identity Guide, BA
 
 - Do not use "buildacubesat" as a display name. It is acceptable as a URL slug or code identifier only.
 
-- Legal entity: nihil.space GmbH (DACH region), nihil.space LLC (international). Based in Bern, Switzerland.
+- Legal entity: nihil.space GmbH, Bern, Switzerland. nihil.space LLC is a registered alias of the GmbH and is not named in BAC artifacts (decided 2026-10-29).
 
 - Attribution fields in files follow one rule with three cases (decided 2026-10-24). A field that asks for the legal entity – KiCad's title-block Company, the organization of a STEP header, 3MF Designer – carries nihil.space GmbH. A field that asks for the project or product – a title, a FILE_DESCRIPTION, a 3MF Title – carries Build a CubeSat (with the part and version where the field is per part). A single mixed field with no such distinction carries Build a CubeSat by nihil.space GmbH. The tools that write these fields (bac-kicad-maintain, bac-freecad-generate-artifacts) take the values from their config, so the rule lives in one place per machine; STL carries no metadata and is exempt.
 
@@ -78,6 +88,7 @@ Governance documents and standards are the exception. The BAC Identity Guide, BA
 | **Context**                                  | **URL**                                  |
 |----------------------------------------------|------------------------------------------|
 | Main project website                         | https://buildacubesat.space              |
+| Documentation site                           | https://docs.buildacubesat.space (Codeberg Pages, built from bac-docs) |
 | User-facing links (docs, products, releases) | Use bac.page short links where available |
 | API and machine-readable endpoints           | Full canonical URL                       |
 
@@ -91,13 +102,13 @@ Do not redefine the BAC visual system in tooling code or project documentation.
 
 - Interaction semantics, accessibility, light and dark behavior, components, data-visualization presentation, terminal presentation, progress and feedback, and physical-indicator semantics live in the BAC Interface Design Guide.
 
-- Tool and platform implementations may carry literal values where an API requires them, for example Rich markup or a self-contained marimo style cell, but those copies are not authoritative and are not edited by hand. The executable source of the Identity Guide's tokens is tokens.json in bac-utils (tools/bac-design-tokens); its generator, bac-design-tokens, writes the reference gallery's and the bac-suite's tokens.css, the Rich colours in bac_common.ui and every marimo style cell. To change a value, change tokens.json and the Identity Guide together, run uv run --no-sync bac-design-tokens, and commit the regenerated copies; bac-design-tokens --check fails CI when a copy is stale. A repository outside bac-utils, such as BAC Ground, takes a copy of the generated tokens.css.
+- Tool and platform implementations may carry literal values where an API requires them, for example Rich markup or a self-contained marimo style cell, but those copies are not authoritative and are not edited by hand. The executable source of the Identity Guide's tokens is tokens.json in bac-utils (tools/bac-design-tokens); its generator, bac-design-tokens, writes the reference gallery's and the bac-suite's tokens.css, the Rich colors in bac_common.ui and every marimo style cell. To change a value, change tokens.json and the Identity Guide together, run uv run --no-sync bac-design-tokens, and commit the regenerated copies; bac-design-tokens --check fails CI when a copy is stale. A repository outside bac-utils, such as BAC Ground, takes a copy of the generated tokens.css.
 
 - Terminal output inherits the user's terminal font and theme; do not attempt font-level styling or app-controlled light and dark mode.
 
 - GUI and web tooling must support the Interface Guide's light and dark requirements and use the Identity Guide's semantic tokens.
 
-- Host applications may require native presentation conventions. Two exceptions to BAC's general sentence-case display rule are documented: Blender's title-case labels (Section 5.1) and the title-case headings and callout titles of the marimo tools (Section 4.3, decided 2026-09-10). Both are recorded here so neither is mistaken for drift.
+- Host applications may require native presentation conventions, but casing is not one of them: headings, titles and labels are Title Case everywhere, Blender panels and marimo tools included (Section 6, decided 2026-10-24).
 
 ### 2.6 Glyphs and Technical Notation
 
@@ -109,7 +120,7 @@ Do not redefine the BAC visual system in tooling code or project documentation.
 
 - Use × for quantities and formulas, for example 2× INA260, 100×100×227 mm. Never a lowercase "x".
 
-- Use of · as a spacer is encouraged where it makes sense. For numbered headings, always use a period: 1., 1.1, 2., 2.1.
+- Use of · as a spacer is encouraged where it makes sense. Numbered headings: the top level takes a period, subsections do not – 1., 1.1, 2., 2.1, never 2.1. with a trailing period.
 
 - Never use an em dash (—), only the Gedankenstrich (–).
 
@@ -127,7 +138,7 @@ Choose format based on intended use:
 | TOML       | Configuration files and parameter sets a human may edit by hand. Used for tool configs, notebook parameter snapshots, any structured human-edited input.                        |
 | JSON       | Machine-to-machine data exchange, API responses, structured outputs not intended for manual editing.                                                                            |
 | TSV        | Avoid unless a source system produces it natively, for example a spreadsheet copy-paste. Prefer CSV with explicit quoting.                                                      |
-| YAML       | Avoid for new tooling. Acceptable in existing Zephyr and F´ configuration files where the framework requires it.                                                                |
+| YAML       | Avoid for new tooling. Acceptable where a framework or service requires it: Zephyr and F´ configuration, mkdocs.yml, and Forgejo and GitHub Actions workflow files.             |
 
 File naming convention:
 
@@ -226,7 +237,7 @@ GitHub is secondary, for projects that depend on GitHub-specific infrastructure 
 | github.com/buildacubesat/CubeSat-Resources | CubeSat Resources website                                                                                              |
 | github.com/buildacubesat/bac-page          | URL shortener (GitHub Pages); bac.page until 2026-10, the old name redirects                                           |
 | github.com/buildacubesat/bac-utils         | BAC tools, shared libraries, engineering notebooks, the operations suite, the Blender extension and the design tokens (tokens.json and bac-design-tokens; GitHub Actions CI) |
-| github.com/buildacubesat/bac-design        | The five BAC guides as Markdown with Word exports, and the brand assets; the normative text the tokens and tools follow |
+| github.com/buildacubesat/bac-design        | The BAC guides, the Trademark Policy and the project checklists as Markdown with PDF exports, the brand assets, fonts and templates; the normative text the tokens and tools follow |
 
 When a tool needs to reference a repo URL, link to Codeberg by default. Use GitHub URLs only for the four repos that are hosted there.
 
@@ -269,6 +280,22 @@ When a tool reads or writes SKUs, validate against this pattern before passing t
 
 All time indications are referenced to UTC. Unix epoch may be used for machine-readable times, [<u>ISO 8601</u>](https://www.iso8601.com/) for human-readable.
 
+### 2.11 Status Labels
+
+Every board and part in a README index, a release table or a docs page carries one status label (decided 2026-10-29). A label is an uppercase word, set as inline code in Markdown – `RELEASED` – never an emoji and never a color alone. Each label maps onto one of the five states of the Interface Design Guide §2.1, so a README, the docs site and BAC Ground show the same status the same way.
+
+| **Label**     | **Meaning**                                                              | **State**         |
+|---------------|--------------------------------------------------------------------------|-------------------|
+| `DEVELOPMENT` | Design in progress, no release; do not order                             | No data / planned |
+| `TESTING`     | Released for testing, or sample boards ordered; may change before release | Information       |
+| `RELEASED`    | Tested; works as expected                                                | Nominal           |
+| `DEPRECATED`  | Works, but superseded; no further revisions                              | Caution           |
+| `DO NOT USE`  | Known defect; do not build or order                                      | Alarm             |
+| `ARCHIVED`    | Moved out of the repository with the yearly archive; its releases remain | No data / planned |
+| `EXTERNAL`    | Third-party item; no design files in BAC                                 | Information       |
+
+bac-hardware and bac-structure use the same labels. A status the table does not cover is a reason to change the table here, not to invent a label in a README.
+
 ## 3. Command-Line Applications
 
 ### 3.1 Reference Implementation
@@ -310,7 +337,7 @@ A tool that edits a user's files in place plans every change first, shows what i
 
 Terminal presentation is specified in the BAC Interface Design Guide, Section 10, including Rich color markup, progress and spinner behavior, tables, inline bar charts, panels, headers, and the canonical run structure. Do not duplicate those rules here.
 
-Implementation requirements in this guide are limited to the stack in Section 3.2 and the behavioral and packaging conventions below. Use Rich for the Interface Guide's terminal profile through bac_common.ui. Its colour constants – GREEN \#3FB950, RED \#E94538, YELLOW \#F7D400 – are generated from tokens.json by bac-design-tokens between marked lines in ui.py; use the constants, never retype the hex, and never edit the generated lines by hand.
+Implementation requirements in this guide are limited to the stack in Section 3.2 and the behavioral and packaging conventions below. Use Rich for the Interface Guide's terminal profile through bac_common.ui. Its color constants – GREEN \#3FB950, RED \#E94538, YELLOW \#F7D400 – are generated from tokens.json by bac-design-tokens between marked lines in ui.py; use the constants, never retype the hex, and never edit the generated lines by hand.
 
 ### 3.5 Interactive Prompts
 
@@ -640,11 +667,11 @@ code, pre, kbd {
 
 Both families load from Google Fonts, so no self-hosting is needed. If a font fails to load it falls back to system-ui, a geometric sans, via the stacks above. Never fall back to a serif. Marimo has its own light and dark toggle; this CSS layers on top of it rather than replacing it.
 
-Headings and callout titles in the marimo tools are title case, with articles, conjunctions and prepositions lowercase: "Cells Do Not Fit the Module", "Day in the Life", "Headline Numbers". This is the documented exception to the Identity Guide's sentence case recorded in Section 2.5, decided for the marimo tools on 2026-09-10.
+Headings and callout titles in the marimo tools are title case, with articles, conjunctions and prepositions lowercase: "Cells Do Not Fit the Module", "Day in the Life", "Headline Numbers". This is the BAC rule everywhere (Section 6); the marimo tools adopted it first, on 2026-09-10.
 
 Titles are matter-of-fact and name what the section holds: "Power Budget Breakdown", not "Where the Watts Go".
 
-Notebook copy uses US spelling – "gray", "behavior", "color", "modeled" – matching the CubeSat Resources site since 2026-09-03.
+Notebook copy uses American spelling – "gray", "behavior", "color", "modeled" – as all BAC text does (Section 6).
 
 ### 4.4 UI Elements
 
@@ -687,9 +714,9 @@ Altair, the primary:
 
 - Width: width='container' for full width; explicit pixel width only for side-by-side charts. width='container' does not propagate into alt.vconcat, so a concatenated chart built that way will not fill the container. Stack charts as separate outputs, separate cells or mo.vstack, instead of alt.vconcat when full width matters.
 
-- Chart text, axis lines, ticks, titles and subtitles carry no colour of their own: marimo hands vega-embed its dark theme on a dark surface – also under the "system" setting, which mo.app_meta().theme reports as light – and Vega's defaults apply on a light one. Do not set labelColor, titleColor, domainColor, tickColor or subtitleColor; a test keeps them out.
+- Chart text, axis lines, ticks, titles and subtitles carry no color of their own: marimo hands vega-embed its dark theme on a dark surface – also under the "system" setting, which mo.app_meta().theme reports as light – and Vega's defaults apply on a light one. Do not set labelColor, titleColor, domainColor, tickColor or subtitleColor; a test keeps them out.
 
-- Color encoding follows the BAC Interface Design Guide, Section 8.3: notebooks cannot know their surface, so categorical series use the shared palette (--chart-shared-1 … -5), which reads at about 4:1 on light and dark; beyond five categories, tints of the five. The ops plot colours (--chart-1 … -6) are per theme and the nebula triad is for Mission material, so neither belongs in a notebook. Sequential → a single-hue ramp of the shared blue ('blues' is acceptable); diverging → 'redblue' only when semantically appropriate.
+- Color encoding follows the BAC Interface Design Guide, Section 8.3: notebooks cannot know their surface, so categorical series use the shared palette (--chart-shared-1 … -5), which reads at about 4:1 on light and dark; beyond five categories, tints of the five. The ops plot colors (--chart-1 … -6) are per theme and the nebula triad is for Mission material, so neither belongs in a notebook. Sequential → a single-hue ramp of the shared blue ('blues' is acceptable); diverging → 'redblue' only when semantically appropriate.
 
 - Altair's default data transformer caps at 5'000 rows. Downsample before charting – one point a minute for a day of ground track – rather than switching to VegaFusion, which is another Pyodide dependency.
 
@@ -801,7 +828,7 @@ Notebooks are exempt from -v and --help; the version is TOOL_VERSION in the cons
 
 - Extensions intended for the 3D viewport or Properties panel, meaning non-VSE, use bl_category = "BAC" instead.
 
-- UI labels use title case. This is a deliberate exception to the brand's general sentence-case rule, recorded in Section 2.5, made because Blender's native UI is title-cased and BAC panels should match their surroundings. No abbreviations unless they are standard Blender conventions such as "FPS" and "AVI".
+- UI labels use Title Case, as all BAC labels do (Section 6), which also matches Blender's native UI. No abbreviations unless they are standard Blender conventions such as "FPS" and "AVI".
 
 - Operator buttons that perform a destructive or long-running action must include a confirm dialog or a visible before/after indicator.
 
@@ -897,21 +924,27 @@ Values are right-aligned by Blender's default prop() rendering. Do not override 
 
 ## 6. Documentation and Governance Conventions
 
-- Governance guides are independently versioned. The BAC Identity Guide, BAC Interface Design Guide, and BAC Project & Tooling Guide carry their own version numbers because they govern multiple artifacts.
+- Governance guides are independently versioned. The guides in bac-design – the BAC Identity Guide, BAC Interface Design Guide, BAC Project & Tooling Guide, BAC Trademark Policy, BAC Project Overview and the Rocinante naming note – carry their own version numbers because they govern multiple artifacts.
 
-- Product, subsystem and software documentation follows its subject's version. A README or user guide names the version of the thing it documents and does not create an unrelated document version number.
+- Product, subsystem and software documentation follows its subject's version. A README or user guide names the version of the thing it documents and does not create an unrelated document version number. The engineering documents in bac-software keep their own versions (Section 2.2).
 
-- Every BAC documentation file includes a version history or revision history appropriate to its class. Governance guides use their own guide version; subject documentation records meaningful documentation changes while keeping the subject version clear. A history is the minimum traceability requirement for a project aiming at flight hardware.
+- Every BAC documentation file that documents a versioned thing includes a version history or revision history appropriate to its class. Governance guides use their own guide version; subject documentation records meaningful documentation changes while keeping the subject version clear. A history is the minimum traceability requirement for a project aiming at flight hardware.
+
+- Pages on the docs site that document no versioned subject – Contributing, Licensing, the Glossary – carry no hand-kept history (decided 2026-10-29). Git is their history, and the site prints each page's last-updated date from it with mkdocs-git-revision-date-localized-plugin. A page about a versioned subject, such as a Dev Kit or a board, follows that subject.
 
 - When updating a governance guide, add a brief entry at the top of its changelog with the date and a one-line description of what changed.
 
 - Titles and headings are matter-of-fact and name their subject: "Power Budget Breakdown", not "Where the Watts Go".
 
-- Use the punctuation, casing, and voice rules from the BAC Identity Guide for prose unless a host platform has an explicitly documented exception, of which there are two: Section 5.1 and Section 4.3.
+- Headings, titles and labels are Title Case everywhere – guides, READMEs, templates, the docs site, tool and notebook UI – with articles, conjunctions and short prepositions lowercase (decided 2026-10-24). UPPERCASE mono micro-labels (Identity Guide §2) and status labels (Section 2.11) are unaffected.
+
+- Spelling is American everywhere: color, gray, behavior, license, center, program, labeled.
+
+- Use the punctuation and voice rules from the BAC Identity Guide for prose. No emoji, also not for status; use the labels in Section 2.11.
 
 ## 7. Quick Reference – The Non-Negotiables
 
-1.  Hardware: CERN OHL-S 2.0. Software: MIT. Documentation: CC BY-SA 4.0. The BAC name and marks are excluded and follow the BAC Trademark Policy.
+1.  Hardware, mechanical parts included: CERN OHL-S 2.0. Software: MIT. Documentation: CC BY-SA 4.0, except READMEs and instructions that belong to a design, which follow its repository. The BAC name and marks are excluded and follow the BAC Trademark Policy. Copyright: nihil.space GmbH and Build a CubeSat contributors.
 
 2.  Physical hardware uses v\<version\>r\<revision\>\[.\<patch\>\]\[-\<variant\>\]; software uses SemVer with v in display output.
 
@@ -923,7 +956,7 @@ Values are right-aligned by Blender's default prop() rendering. Do not override 
 
 6.  Human-edited config is TOML; tabular exchange and logs are CSV; machine-to-machine is JSON; avoid YAML unless a framework requires it.
 
-7.  Codeberg is the primary source forge; GitHub hosts the three repos that need its Pages and Actions: CubeSat-Resources, bac-page and bac-utils.
+7.  Codeberg is the primary source forge; GitHub hosts the four repos that need its Pages and Actions: CubeSat-Resources, bac-page, bac-utils and bac-design.
 
 8.  All times are UTC; Unix epoch for machine-readable time, ISO 8601 for human-readable time.
 
@@ -937,11 +970,16 @@ Values are right-aligned by Blender's default prop() rendering. Do not override 
 
 13. Fail with actionable errors, validate before writes and API calls, and expose --dry-run where changes can be previewed.
 
+14. Branches merge with git merge --no-ff; never squash, never rebase a tagged branch.
+
+15. Title Case headings, American spelling, no emoji; status is one of the labels in Section 2.11.
+
 ## 8. Version History
 
 | **Version** | **Date** | **Change** |
 |------------|-------------|-----------------------------------------------------------------|
-| 0.15        | 2026-10-27 | The design rebase of Identity Guide 1.0 and Interface Design Guide 1.0 carried into tooling. Section 2.5: tokens.json in bac-utils is the executable token source; bac-design-tokens writes the gallery's and the bac-suite's tokens.css, the Rich colours and the marimo style cells, --check fails CI on a stale copy, and other repositories such as BAC Ground take a copy of the generated tokens.css. Section 2.8: the bac-utils row names the design tokens. Section 3.4: bac_common.ui's colours are generated – \#3FB950, \#E94538, \#F7D400. Section 3.8: the error rendering in the new red. Section 4.3: the canonical style cell rewritten – \#F9F9F9/#1F1E1D, \#3F3F3F/#E5E5E5, \#6D6D6D/#A9A8A6, Nunito Sans body and 500 headings, IBM Plex Mono for code only, 10px callouts – generated rather than copied; the stale third correction about .vega-embed removed (the rule left the notebooks on 2026-10-24). Section 4.5: chart text takes marimo's chart theme; the shared notebook palette and the new MUTED pair, both generated. Section 7: item 10 names the generated copies. Section 2.1 and Section 7: the BAC Marks are excluded from the open licences and follow the new BAC Trademark Policy 1.0; repositories that ship logo artwork say so in their README. Section 2.8: the guides move to github.com/buildacubesat/bac-design. |
+| 0.16        | 2026-10-29 | The governance alignment of the 2026-10-24 docs stock-take. Section 2.1: mechanical parts and bac-structure named under CERN OHL-S 2.0; documentation follows the design it describes, standalone prose is CC BY-SA 4.0, bac-software adds LICENSE-CC-BY-SA-4.0; the legacy-license clause, bac-hardware's single license text and the bac-structure relicense; the copyright line; the bac.page link as Source Location. Section 2.2: merge commits (--no-ff), never squash, never rebase a tagged branch, replacing fast-forward; the BAC-FSW and BAC-SBC documents keep their own versions. Section 2.3: nihil.space GmbH only, the LLC a registered alias. Section 2.4: docs.buildacubesat.space. Sections 2.5, 4.3, 5.1 and 6: Title Case everywhere, the Blender and marimo exceptions retired. Section 2.6: no trailing period on subsection numbers. Section 2.7: YAML for mkdocs.yml and workflow files. Section 2.8: bac-design holds the guides, the checklists and PDF exports. New Section 2.11: status labels. Section 6: docs-site pages without a versioned subject take their history from git; American spelling. Section 7: items 1 and 7 updated, items 14 and 15. American spelling throughout. |
+| 0.15        | 2026-10-27 | The design rebase of Identity Guide 1.0 and Interface Design Guide 1.0 carried into tooling. Section 2.5: tokens.json in bac-utils is the executable token source; bac-design-tokens writes the gallery's and the bac-suite's tokens.css, the Rich colors and the marimo style cells, --check fails CI on a stale copy, and other repositories such as BAC Ground take a copy of the generated tokens.css. Section 2.8: the bac-utils row names the design tokens. Section 3.4: bac_common.ui's colors are generated – \#3FB950, \#E94538, \#F7D400. Section 3.8: the error rendering in the new red. Section 4.3: the canonical style cell rewritten – \#F9F9F9/#1F1E1D, \#3F3F3F/#E5E5E5, \#6D6D6D/#A9A8A6, Nunito Sans body and 500 headings, IBM Plex Mono for code only, 10px callouts – generated rather than copied; the stale third correction about .vega-embed removed (the rule left the notebooks on 2026-10-24). Section 4.5: chart text takes marimo's chart theme; the shared notebook palette and the new MUTED pair, both generated. Section 7: item 10 names the generated copies. Section 2.1 and Section 7: the BAC Marks are excluded from the open licenses and follow the new BAC Trademark Policy 1.0; repositories that ship logo artwork say so in their README. Section 2.8: the guides move to github.com/buildacubesat/bac-design. |
 | 0.14        | 2026-10-24 | The bac-utils homogenization written down. Section 2.3: the attribution rule for company, project and mixed fields (decided 2026-10-24). Section 2.7.1: the shared \[spacecraft\] and \[\[deployables\]\] tables, directions in letter form in the owning tool's table, panels matched to deployables by name (decided 2026-10-24). Section 2.2: git tags \<tool\>-v\<X.Y.Z\> where another repository pins a version; fast-forward merges. Section 2.6: lowercase axis letters in command-line values and file names. Section 2.7.1: the 500 km planning orbit. Section 2.8: the bac-utils row; bac.page renamed bac-page. Section 3.1: bac-common is the reference implementation. Section 3.3: -v and --debug universal, the other flags where they apply; stdout and -o for filters; skip-existing and --force for batch tools; the in-place editing rule (plan, show, confirm, .bak, span edits). Section 3.8: BacError and its subclasses instead of SystemExit. Section 3.9: 48 lines for a subcommand with many options; count on Python 3.11; Typer epilogs. Section 4.1.1: compiled models as offline tables. Section 4.3: the style cell's values copy the gallery's tokens.css; --text-muted is \#6C6B67/#A3A29C. Section 4.5: MUTED follows. Section 4.8: what the headless checks miss. New Section 4.9: notebooks in the repository – folder layout, the two bac.page links reading main, versioning, ruff exemptions. Section 5: the third sub-panel, modal operators, the extension's own labels and operator ids; the known deviation is gone.                                                                                                                                                                                                                                                             |
 | 0.13        | 2026-09-15 | Homogenization pass over the three marimo notebooks (link budget 0.7.0, optical payload 0.7.0, power budget 0.5.0), plus a presentation pass over the whole guide. Guide-wide: headings to title case, US spelling, section references spelled out rather than using the paragraph sign, markdown escape artifacts and stray hard line breaks removed, bold reduced. Section 2.5: recorded the marimo title-case exception beside the Blender one. Section 2.6: axis directions never use sign notation; the thousands separator is display only. Section 2.7: added 2.7.1, the shared TOML mission profile contract, with normative key names for \[orbit\], \[ground_station\], \[target\] and \[map\], the \[results.\<tool\>\] convention, per-row results and author detection. Section 4.1: pyarrow\>=15.0 for notebooks that show tables. Section 4.1.1: molab keeps PEP 723 bounds as written. Section 4.2: the header-cell recipe and the 21-step reference cell order, the two constraints that force the splits, and the dataflow-ordering note for the export cell. Section 4.3: the canonical style cell including the .vega-embed rule and comments for all three corrections; title case; matter-of-fact titles; US spelling. Section 4.4: clamping helpers, data_editor validation, preset versus profile resolution, the sidebar pattern, the two-column panel default and the mo.ui.number separator limitation. Section 4.5: the shared chart-conventions cell, the 5'000-row transformer cap, the log-axis-with-zero failure, and 4.5.1, the map recipe with the date-line split. Section 4.6: gray headline cards with callouts doing the judging, fixed callout kinds, cross-tool callout naming. New Section 4.7 for profiles, exports and reports. New Section 4.8 for notebook tooling and testing. |
 | 0.12        | 2026-09-08 | Five marimo corrections found while building the BAC Link Budget notebook. Section 4.3: replaced the fallback style cell's @media (prefers-color-scheme: dark) block with CSS light-dark(), because marimo's light and dark setting is independent of the OS and the media query could leave light text on a light surface; added --heading-font, without which marimo's .markdown h1 selector wins and headings fall back to Lora. Section 4.5: replaced the deprecated alt.themes.enable('default') with alt.theme.enable(...); noted that width='container' does not propagate into alt.vconcat; added the .vega-embed text fill rule. Section 4.1: added 4.1.1 on WebAssembly notebooks – Pyodide's fixed package set and versions, minimum-bound-only PEP 723 dependencies, unavailable compiled packages such as sgp4, and the 2 GB memory limit. Section 4.4: mo.ui.slider must set show_value=True; a mo.ui value cannot be read in its own defining cell; mo.ui.number renders thousands with a comma.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
