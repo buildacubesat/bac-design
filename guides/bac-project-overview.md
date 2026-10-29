@@ -1,40 +1,42 @@
-# Build a CubeSat ''“ Project Overview
+# Build a CubeSat â€“ Project Overview
 
-**Build a CubeSat ''“ Consolidated project reference** Version 0.3, 2026-08-10
+**Build a CubeSat â€“ Consolidated project reference** Version 0.4, 2026-10-29
 
 > **Space is for everyone.** This document is the durable orientation reference for Build a CubeSat (BAC): what the project is, why it exists, how its major parts fit together, how it relates to nihil.space, and where authoritative detail lives.
 
-## 0. Authority and scope
+## 0. Authority and Scope
 
-This overview synthesises the project but is not the authority for specialist rules. When documents disagree, use the source closest to the subject:
+This overview synthesizes the project but is not the authority for specialist rules. When documents disagree, use the source closest to the subject:
 
-1.  **BAC Identity Guide** ''“ brand, voice and tone, typography, colour, visual language, imagery, and the Ops/Mission communication modes.
+1.  **BAC Identity Guide** â€“ brand, voice and tone, typography, color, visual language, imagery, and the Ops/Mission communication modes.
 
-2.  **BAC Interface Design Guide** ''“ interface behaviour, accessibility, interaction, semantic states, data visualisation, terminal presentation, and physical indicators.
+2.  **BAC Interface Design Guide** â€“ interface behavior, accessibility, interaction, semantic states, data visualization, terminal presentation, and physical indicators.
 
-3.  **BAC Project & Tooling Guide** ''“ licensing, versioning, repositories, data formats, SKUs, CLI implementation, configuration and secrets, Marimo structure, Blender extensions, and project-wide engineering conventions.
+3.  **BAC Project & Tooling Guide** â€“ licensing, versioning, repositories, data formats, SKUs, CLI implementation, configuration and secrets, Marimo structure, Blender extensions, and project-wide engineering conventions. The **BAC Trademark Policy** governs how others may use the BAC name and marks, and the **Rocinante naming note** how the flight software stack is named.
 
-4.  **Subsystem READMEs, SDDs, test reports and releases** ''“ current hardware and software implementation.
+    These guides live in bac-design (https://github.com/buildacubesat/bac-design).
 
-5.  **Issue trackers and project boards** ''“ active work, unresolved engineering questions and near-term priorities.
+4.  **Subsystem READMEs, SDDs, test reports and releases** â€“ current hardware and software implementation.
 
-6.  **Storefront and legal pages** ''“ current prices, availability, shipping, terms and company details.
+5.  **Issue trackers and project boards** â€“ active work, unresolved engineering questions and near-term priorities.
 
-This document should change only when the project'''s **structure, purpose or major architecture** changes. Routine revisions, release dates and short-term plans should not require an edit here.
+6.  **Storefront and legal pages** â€“ current prices, availability, shipping, terms and company details.
 
-## 1. In one paragraph
+This document should change only when the project's **structure, purpose or major architecture** changes. Routine revisions, release dates and short-term plans should not require an edit here.
 
-*Build a CubeSat* (BAC) is an open-source CubeSat platform intended to make real satellite engineering more accessible to students, educators, researchers, makers and small teams. It combines modular spacecraft hardware, structural CAD, the **Rocinante** flight-software stack, development and test tooling, documentation, educational material and commercially available hardware. BAC began as a self-taught engineering project and has grown into a public development programme built around a simple premise: useful space hardware should be understandable, modifiable, testable and affordable enough that more people can participate in building it.
+## 1. In One Paragraph
 
-BAC is operated commercially through **nihil.space**, which provides the legal and commercial framework and also undertakes civilian space-engineering work. BAC remains the public project, product and community identity.
+*Build a CubeSat* (BAC) is an open-source CubeSat platform intended to make real satellite engineering more accessible to students, educators, researchers, makers and small teams. It combines modular spacecraft hardware, structural CAD, the **Rocinante** flight-software stack, development and test tooling, documentation, educational material and commercially available hardware. BAC began as a self-taught engineering project and has grown into a public development program built around a simple premise: useful space hardware should be understandable, modifiable, testable and affordable enough that more people can participate in building it.
 
-## 2. Why BAC exists
+BAC is operated commercially through **nihil.space GmbH**, which provides the legal and commercial framework and also undertakes civilian space-engineering work. BAC remains the public project, product and community identity.
 
-Commercial CubeSat development hardware is often expensive, closed, vertically integrated or difficult to modify. That is workable for organisations buying a finished solution, but much less useful for people who want to understand the system, replace a subsystem, build a new board, study failure modes or carry knowledge from one project into the next.
+## 2. Why BAC Exists
+
+Commercial CubeSat development hardware is often expensive, closed, vertically integrated or difficult to modify. That is workable for organizations buying a finished solution, but much less useful for people who want to understand the system, replace a subsystem, build a new board, study failure modes or carry knowledge from one project into the next.
 
 BAC takes the opposite approach:
 
-- **Open by default.** Schematics, PCB layouts, mechanical designs, software and documentation are published under established open licences.
+- **Open by default.** Schematics, PCB layouts, mechanical designs, software and documentation are published under established open licenses.
 
 - **Modular rather than monolithic.** Subsystems are intended to be replaceable, extendable and reusable across development configurations.
 
@@ -42,61 +44,61 @@ BAC takes the opposite approach:
 
 - **Affordable enough to experiment.** Cost reduction matters because iteration is central to learning and engineering.
 
-- **Transparent about maturity.** Experimental, incomplete and unqualified work is labelled as such rather than presented as finished flight hardware.
+- **Transparent about maturity.** Experimental, incomplete and unqualified work is labeled as such rather than presented as finished flight hardware.
 
 - **Educational through the process itself.** Design decisions, tests, mistakes and revisions are part of the public record rather than hidden behind the finished product.
 
 The long-term objective is not merely to produce a kit. It is to build an open spacecraft platform and the engineering culture around it.
 
-## 3. Project principles
+## 3. Project Principles
 
-### 3.1 Space is for everyone
+### 3.1 Space Is for Everyone
 
 BAC treats access to space technology as a participation problem as much as a technical one. The intended audience includes people who may not begin with institutional funding, aerospace credentials or access to proprietary spacecraft platforms.
 
-### 3.2 Open source must be usable
+### 3.2 Open Source Must Be Usable
 
 Publishing source files is not enough. A useful open platform also needs understandable documentation, reproducible releases, standard interfaces, sourcing information, test procedures and a path for outside contributors to extend it.
 
-### 3.3 Fail loudly, succeed quietly
+### 3.3 Fail Loudly, Succeed Quietly
 
-A caveat is useful information. WIP, TBD, PRELIMINARY, DO NOT USE and similar labels are part of the project'''s engineering language, not embarrassments to be polished away. This principle is reflected in the BAC Identity, Interface Design and Project & Tooling guides.
+A caveat is useful information. WIP, TBD, PRELIMINARY, DO NOT USE and similar labels are part of the project's engineering language, not embarrassments to be polished away. This principle is reflected in the BAC Identity, Interface Design and Project & Tooling guides.
 
-### 3.4 Build toward real flight constraints
+### 3.4 Build Toward Real Flight Constraints
 
 BAC development hardware is not presented as flight-qualified simply because it uses spacecraft-like form factors or architecture. Nevertheless, the project uses a real spacecraft as the calibration target: interface discipline, configuration control, software quality, testability, failure handling and traceability are developed with eventual flight use in mind.
 
-### 3.5 Civilian purpose
+### 3.5 Civilian Purpose
 
-nihil.space undertakes civilian work focused on science, education, exploration and related engineering. BAC'''s published open-source designs are necessarily available to downstream users under their licences; the civilian-use commitment governs the contracts, partnerships and development direction undertaken by the project and company themselves.
+nihil.space undertakes civilian work focused on science, education, exploration and related engineering. BAC's published open-source designs are necessarily available to downstream users under their licenses; the civilian-use commitment governs the contracts, partnerships and development direction undertaken by the project and company themselves.
 
-## 4. Historical context
+## 4. Historical Context
 
 Only milestones useful for understanding the project are kept here:
 
-- **2020** ''“ BAC begins as a personal effort to learn the disciplines required to design and build a CubeSat.
+- **2020** â€“ BAC begins as a personal effort to learn the disciplines required to design and build a CubeSat.
 
-- **2024** ''“ the public YouTube development log begins, turning the engineering process into a documented community project.
+- **2024** â€“ the public YouTube development log begins, turning the engineering process into a documented community project.
 
-- **2025** ''“ the first integrated, CubeSat-class prototype, **SN1**, flies on a high-altitude balloon, providing experience with telemetry, operations, environmental testing and post-flight analysis.
+- **2025** â€“ the first integrated, CubeSat-class prototype, **SN1**, flies on a high-altitude balloon, providing experience with telemetry, operations, environmental testing and post-flight analysis.
 
-- **After SN1** ''“ the project begins a broader architectural maturation: dedicated EPS and carrier hardware, a structured interconnect, and the Rocinante software architecture replace much of the balloon-era prototype stack.
+- **After SN1** â€“ the project begins a broader architectural maturation: dedicated EPS and carrier hardware, a structured interconnect, and the Rocinante software architecture replace much of the balloon-era prototype stack.
 
 The SN1 architecture remains useful project history, but it should not be cited as the current BAC spacecraft architecture. In particular, its Python/LoRa/CBOR/Firebase telemetry stack was a test-flight solution and has been superseded in the main development path.
 
-## 5. System architecture
+## 5. System Architecture
 
 BAC is best understood as a **platform of replaceable layers**, not one fixed spacecraft configuration.
 
-### 5.1 Mechanical and electrical platform
+### 5.1 Mechanical and Electrical Platform
 
-The hardware programme includes:
+The hardware program includes:
 
 - CubeSat structures and mechanical parts;
 
 - an electrical power system with battery, charging, regulation, switching, monitoring and protection;
 
-- small-node MCU carrier hardware for subsystem control;
+- MicroMod carrier hardware for small- and medium-node subsystem control;
 
 - a Raspberry Pi Compute Module carrier for higher-level computing;
 
@@ -108,7 +110,7 @@ The hardware programme includes:
 
 Individual boards move through their own revision and test cycles. **The hardware repository and release notes are authoritative for current revisions and suitability.** A board marked DO NOT USE, experimental or testing should be treated accordingly.
 
-### 5.2 Rocinante flight software
+### 5.2 Rocinante Flight Software
 
 The current software architecture is called **Rocinante** (*Roci* after first mention). Its central architectural split is deliberate:
 
@@ -124,29 +126,29 @@ The current main inter-node transport is CSP over CAN, with BAC-defined services
 
 The architecture is intentionally modular. Specific component versions, node IDs, packet layouts, security details and implementation status belong in the Rocinante SDDs and source repositories rather than this overview.
 
-### 5.3 Ground and development tooling
+### 5.3 Ground and Development Tooling
 
-BAC includes the tooling needed to develop, test and operate the platform: command-line utilities, engineering notebooks, release tooling, visualisation, manufacturing helpers and ground-segment work. These tools follow the **BAC Interface Design Guide** for interaction and presentation and the **BAC Project & Tooling Guide** for implementation conventions.
+BAC includes the tooling needed to develop, test and operate the platform: command-line utilities, engineering notebooks, release tooling, visualization, manufacturing helpers and ground-segment work. These tools follow the **BAC Interface Design Guide** for interaction and presentation and the **BAC Project & Tooling Guide** for implementation conventions.
 
-## 6. Maturity and qualification
+## 6. Maturity and Qualification
 
 BAC distinguishes between **development capability** and **flight qualification**.
 
 Unless a specific release explicitly states otherwise, BAC hardware should be assumed to be intended for development, education, laboratory testing and relevant-environment experimentation rather than orbital flight. The same principle applies to software maturity: an architecture may be designed with flight use in mind without claiming a stable or flight-qualified release.
 
-Qualification is treated as a programme of evidence, not a marketing label. It requires increasingly representative hardware, repeatable testing, documented configuration, failure analysis, environmental testing and system-level validation.
+Qualification is treated as a program of evidence, not a marketing label. It requires increasingly representative hardware, repeatable testing, documented configuration, failure analysis, environmental testing and system-level validation.
 
-A useful shorthand for the project'''s maturation path is:
+A useful shorthand for the project's maturation path is:
 
-**bench integration '†’ relevant-environment testing '†’ subsystem maturation '†’ qualification hardware '†’ integrated flight model '†’ orbital demonstration**
+**bench integration â†’ relevant-environment testing â†’ subsystem maturation â†’ qualification hardware â†’ integrated flight model â†’ orbital demonstration**
 
-These are **capability gates, not calendar commitments**. Public dates should only be attached to them when a real programme, partner and sufficiently mature plan justify doing so.
+These are **capability gates, not calendar commitments**. Public dates should only be attached to them when a real program, partner and sufficiently mature plan justify doing so.
 
-## 7. Products and commercial model
+## 7. Products and Commercial Model
 
 BAC sells or plans to sell hardware derived from the same open platform used for development. The central product concept is a **CubeSat development kit** that gives users a mechanically and electrically coherent starting point while allowing them to replace compute modules, subsystem boards and payload hardware as their work evolves.
 
-Other product categories include subsystem hardware, education-focused configurations, development utilities and limited merchandise. **Current catalogue, price and availability belong on the storefront, not in this document.**
+Other product categories include subsystem hardware, education-focused configurations, development utilities and limited merchandise. **Current catalog, price and availability belong on the storefront, not in this document.**
 
 The business model does not depend on keeping the design secret. Commercial value comes from:
 
@@ -168,23 +170,24 @@ The business model does not depend on keeping the design secret. Commercial valu
 
 That distinction is central to BAC: the files remain open; the product is the quality and convenience of turning those files into something people can actually use.
 
-## 8. Open-source model
+## 8. Open-Source Model
 
 Canonical licensing is defined in the **BAC Project & Tooling Guide**. At project level, the intended split is:
 
-| **Artifact**  | **Licence**                                                                  |
+| **Artifact**  | **License**                                                                  |
 |---------------|------------------------------------------------------------------------------|
-| Hardware      | CERN OHL-S 2.0 for current BAC hardware unless the artifact states otherwise |
+| Hardware      | CERN OHL-S 2.0, mechanical parts included                                    |
 | Software      | MIT                                                                          |
-| Documentation | CC BY-SA 4.0                                                                 |
+| Documentation | CC BY-SA 4.0; READMEs and instructions that belong to a design follow its repository |
+| Brand marks   | Not openly licensed â€“ BAC Trademark Policy                                   |
 
-Older hardware may retain the licence under which it was originally released unless it has been explicitly relicensed. The licence declared by the artifact or repository is authoritative.
+Older hardware may retain the license under which it was originally released unless it has been explicitly relicensed, as all bac-structure releases were in 2026-10. The license declared by the artifact or repository is authoritative.
 
-Contributors retain their work under the applicable project licence rather than assigning ownership simply to participate. The objective is a genuinely extendable ecosystem in which new boards, tools and improvements can exist both in core BAC repositories and in contributor-owned projects that implement BAC interfaces.
+Contributors retain their work under the applicable project license rather than assigning ownership simply to participate. The objective is a genuinely extendable ecosystem in which new boards, tools and improvements can exist both in core BAC repositories and in contributor-owned projects that implement BAC interfaces.
 
-## 9. Community, documentation and education
+## 9. Community, Documentation and Education
 
-BAC is developed in public. The community layer is not separate from the engineering programme; it is one of the ways the platform is tested, explained and improved.
+BAC is developed in public. The community layer is not separate from the engineering program; it is one of the ways the platform is tested, explained and improved.
 
 Key public surfaces include:
 
@@ -200,7 +203,7 @@ Key public surfaces include:
 
 Contribution is encouraged at more than one level. Focused fixes and improvements can land directly in core repositories; independent modules, tooling and experiments can remain in contributor-owned repositories while still becoming part of the wider BAC ecosystem through documented interfaces.
 
-The project should favour **contributor-ready boundaries** over centralising every idea into one repository.
+The project should favor **contributor-ready boundaries** over centralising every idea into one repository.
 
 ## 10. BAC and nihil.space
 
@@ -212,17 +215,17 @@ The separation is intentional:
 |---------------------------|-----------------------------------------------------------------|
 | **Build a CubeSat / BAC** | Open spacecraft platform, products, documentation and community |
 | **Rocinante / Roci**      | BAC flight-software stack, based on Zephyr and NASA F Prime     |
-| **nihil.space**           | Legal/commercial vehicle and professional engineering practice  |
+| **nihil.space GmbH**      | Legal/commercial vehicle and professional engineering practice  |
 
 BAC-facing communication should remain BAC-led. nihil.space appears where legal, contractual or company context requires it rather than as routine co-branding.
 
 Consulting and product development reinforce each other: engineering work outside BAC can finance and inform the open platform, while BAC provides a public body of real engineering work that demonstrates capability far more effectively than a conventional portfolio.
 
-Current legal structure, addresses, ownership details, contract counterparties and similar corporate information belong in nihil.space'''s legal/company records rather than this overview.
+Current legal structure, addresses, ownership details, contract counterparties and similar corporate information belong in nihil.space's legal/company records rather than this overview.
 
-## 11. Development direction
+## 11. Development Direction
 
-BAC should avoid publishing a long list of calendar promises as its strategic roadmap. The durable direction is better expressed as a set of programme goals:
+BAC should avoid publishing a long list of calendar promises as its strategic roadmap. The durable direction is better expressed as a set of program goals:
 
 1.  **Make the development platform coherent end to end.** Hardware, firmware, flight software, documentation and tooling should work together as one reproducible system.
 
@@ -234,11 +237,11 @@ BAC should avoid publishing a long list of calendar promises as its strategic ro
 
 5.  **Build a sustainable project.** Hardware sales, education, community support and civilian consulting should fund continued open development without making openness itself the thing being sold back to users.
 
-6.  **Demonstrate the platform in space when ready.** An orbital demonstration remains the natural long-term proof of the programme, but readiness and opportunity should drive timing rather than an arbitrary date.
+6.  **Demonstrate the platform in space when ready.** An orbital demonstration remains the natural long-term proof of the program, but readiness and opportunity should drive timing rather than an arbitrary date.
 
 Near-term priorities and committed milestones should live in project boards, issues, release plans and public announcements where they can change without making this overview obsolete.
 
-## 12. What this overview deliberately omits
+## 12. What This Overview Deliberately Omits
 
 The previous consolidated summary included useful research but mixed durable project identity with transient operational detail. The following categories are intentionally excluded here:
 
@@ -248,7 +251,7 @@ The previous consolidated summary included useful research but mixed durable pro
 
 - board revision tables and release dates;
 
-- commit counts, stars, forks and ''"last updated''" statistics;
+- commit counts, stars, forks and "last updated" statistics;
 
 - individual pull-request numbers;
 
@@ -264,13 +267,13 @@ The previous consolidated summary included useful research but mixed durable pro
 
 - client-project details not needed to understand BAC;
 
-- speculative long-term business concepts not yet part of BAC'''s public programme;
+- speculative long-term business concepts not yet part of BAC's public program;
 
 - issue-by-issue engineering TODO lists and source-conflict registers.
 
-None of these are necessarily unimportant. They are simply better maintained in **live, purpose-specific records** than in the project'''s main orientation document.
+None of these are necessarily unimportant. They are simply better maintained in **live, purpose-specific records** than in the project's main orientation document.
 
-## 13. Canonical references
+## 13. Canonical References
 
 | **Subject**                                                          | **Source**                       |
 |----------------------------------------------------------------------|----------------------------------|
@@ -280,7 +283,9 @@ None of these are necessarily unimportant. They are simply better maintained in 
 | Hardware revisions and release artifacts                             | bac-hardware repository          |
 | Mechanical design                                                    | bac-structure repository         |
 | Rocinante architecture and implementation                            | bac-software repository and SDDs |
-| Documentation                                                        | bac-docs repository              |
+| Documentation                                                        | bac-docs repository, docs.buildacubesat.space |
+| Use of the BAC name and marks                                        | **BAC Trademark Policy**         |
+| Flight software naming                                               | Rocinante naming note            |
 | Current products, prices and availability                            | buildacubesat.space              |
 | Public short links                                                   | bac.page                         |
 | Learning resources                                                   | cubesat-resources.space          |
@@ -292,14 +297,15 @@ None of these are necessarily unimportant. They are simply better maintained in 
 
 Build a CubeSat is an open, modular spacecraft-development platform whose real product is broader than a set of PCBs. It combines hardware, software, mechanical design, tooling, documentation, education and a public engineering process into one system intended to lower the barrier to meaningful spacecraft development.
 
-The project'''s credibility depends less on promising a particular launch year than on steadily increasing what can be demonstrated: hardware that works, software that fails safely, interfaces others can build against, tests that can be repeated, documentation that survives the people who wrote it, and a community capable of improving the system independently.
+The project's credibility depends less on promising a particular launch year than on steadily increasing what can be demonstrated: hardware that works, software that fails safely, interfaces others can build against, tests that can be repeated, documentation that survives the people who wrote it, and a community capable of improving the system independently.
 
 That is the durable roadmap.
 
-## 15. Version history
+## 15. Version History
 
 | **Version** | **Date**   | **Change**                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 |-------------|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 0.3         | 2026-08-10 | Rewritten as a durable project overview rather than a consolidated status dump. Removed firm future dates, volatile release/commercial details, repository statistics, personal finance, contributor rosters, implementation-level factoids and the large conflict/TODO register. Reframed the roadmap as capability gates and programme goals. Updated authority references to the BAC Identity Guide, BAC Interface Design Guide and BAC Project & Tooling Guide. |
+| 0.4         | 2026-10-29 | Moved from Google Drive into bac-design `guides/`. Â§0: the Trademark Policy and the Rocinante naming note among the guides, which live in bac-design. Â§1, Â§10: nihil.space GmbH as the legal entity. Â§5.1: the MicroMod carrier serves small and medium nodes. Â§8: mechanical parts under CERN OHL-S 2.0, documentation follows the design it describes, the marks excluded, the bac-structure relicense. Â§13: the docs site, the Trademark Policy and the naming note. Headings to Title Case and American spelling throughout. |
+| 0.3         | 2026-08-10 | Rewritten as a durable project overview rather than a consolidated status dump. Removed firm future dates, volatile release/commercial details, repository statistics, personal finance, contributor rosters, implementation-level factoids and the large conflict/TODO register. Reframed the roadmap as capability gates and program goals. Updated authority references to the BAC Identity Guide, BAC Interface Design Guide and BAC Project & Tooling Guide. |
 | 0.2         | 2026-07-23 | Consolidated corporate and project context and reconciled several source conflicts.                                                                                                                                                                                                                                                                                                                                                                                 |
 | 0.1         | 2026-07-23 | Initial compilation from prior project summaries and working references.                                                                                                                                                                                                                                                                                                                                                                                            |
