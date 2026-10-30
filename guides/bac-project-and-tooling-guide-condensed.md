@@ -1,6 +1,6 @@
 # BAC Guide Rules – Condensed Checklist for Reviewing Utils
 
-- Source: BAC Project & Tooling Guide v0.16 (2026-10-29), BAC Interface Design Guide v1.1 (2026-10-29), BAC Identity Guide v1.4 (2026-10-30) and BAC Trademark Policy v1.2 (2026-10-29).
+- Source: BAC Project & Tooling Guide v0.17 (2026-10-30), BAC Interface Design Guide v1.1 (2026-10-29), BAC Identity Guide v1.4 (2026-10-30) and BAC Trademark Policy v1.2 (2026-10-29).
 
 ## Project-Wide
 
@@ -35,7 +35,7 @@
 
 - Design tokens: tokens.json in bac-utils (tools/bac-design-tokens) is the executable source of the Identity Guide's tokens, MIT or CC BY-SA 4.0. bac-design-tokens writes the gallery's and bac-suite's tokens.css, the Rich colors in bac_common.ui and every marimo style cell; never edit a generated copy, run uv run --no-sync bac-design-tokens and commit; --check fails CI on a stale copy. Other repos (BAC Ground) take a copy of the generated tokens.css.
 
-- Repos: Codeberg primary (codeberg.org/buildacubesat-project/...); GitHub only for bac-page, CubeSat-Resources, bac-utils and bac-design (the guides).
+- Repos: Codeberg primary (codeberg.org/buildacubesat-project/...); GitHub only for bac-page, CubeSat-Resources, bac-utils, bac-design (the guides) and bac-ops (private operations data).
 
 - Time: UTC; Unix epoch machine-readable, ISO 8601 human-readable.
 
