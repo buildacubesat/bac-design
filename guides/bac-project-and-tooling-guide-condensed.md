@@ -1,6 +1,6 @@
 # BAC Guide Rules – Condensed Checklist for Reviewing Utils
 
-- Source: BAC Project & Tooling Guide v0.16 (2026-10-29), BAC Interface Design Guide v1.1 (2026-10-29), BAC Identity Guide v1.3 (2026-10-29) and BAC Trademark Policy v1.2 (2026-10-29).
+- Source: BAC Project & Tooling Guide v0.16 (2026-10-29), BAC Interface Design Guide v1.1 (2026-10-29), BAC Identity Guide v1.4 (2026-10-30) and BAC Trademark Policy v1.2 (2026-10-29).
 
 ## Project-Wide
 

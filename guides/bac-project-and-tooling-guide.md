@@ -45,15 +45,19 @@ Every board carries its bac.page link – on the silkscreen and in its schematic
 
 Include the appropriate SPDX identifier in every pyproject.toml:
 
-license = { text = "MIT" }
+```text
+license = { text = "MIT" }
+```
 
-### 2.2 Versioning
+### 2.2 Versioning
 
 Physical and tangible items (PCBs, hardware assemblies, mechanical parts) use a human-friendly scheme:
 
-v\<version\>r\<revision\>\[.\<patch\>\]\[-\<variant\>\]
+```text
+v<version>r<revision>[.<patch>][-<variant>]
+```
 
-
+
 
 Examples: v1r2, v3r4.1, v2r2.1-flight. The version increments on significant redesigns; the revision on iterative changes; the optional patch on minor corrections; the variant suffix distinguishes build configurations, for example -flight or -proto.
 
@@ -142,9 +146,11 @@ Choose format based on intended use:
 
 File naming convention:
 
-{project}-{descriptor}-{YYYY-MM-DD}.{ext}
+```text
+{project}-{descriptor}-{YYYY-MM-DD}.{ext}
+```
 
-
+
 
 Examples: bac-eps-bom-2026-06-04.csv, bac-hk-telemetry-2026-06-04.csv.
 
@@ -175,7 +181,7 @@ Results go in a \[results.\<tool\>\] table at the end, where \<tool\> is the slu
 
 Authorship is detected from the tool key, and failing that from a signature table that only one tool writes: \[\[modes\]\], \[sensor\] or \[storage\]. Each tool states in its loader status block what it took from a foreign profile and what it ignored.
 
-```toml
+```toml
 name = "Demo mission, 500 km SSO"
 tool = "bac_link_budget"
 tool_version = "0.7.0"
@@ -211,7 +217,7 @@ key = ""
 # one table per row of the tool's mode table, matched by name or modulation
 ```
 
-
+
 
 The BAC demo mission's planning orbit is a 500 km Sun-synchronous orbit (inclination 97.4°, LTDN 10:30); the BAC profiles shipped with the notebooks use it.
 
@@ -246,9 +252,11 @@ When a tool needs to reference a repo URL, link to Codeberg by default. Use GitH
 
 Tools that interact with the Shopify store, inventory, fulfillment, or any other part of the production pipeline must generate and parse SKUs according to this scheme:
 
-bac-\<cat\>-\<sub\>-\<name-with-hyphens\>-\<versionstring\>\[-\<variant\>\]
+```text
+bac-<cat>-<sub>-<name-with-hyphens>-<versionstring>[-<variant>]
+```
 
-
+
 
 | **Field**     | **Description**                                                                                                                            |
 |---------------|--------------------------------------------------------------------------------------------------------------------------------------------|
@@ -263,17 +271,15 @@ All fields are lowercase. Hyphens are the only separator. No spaces, underscores
 
 Examples:
 
-bac-dev-adc-magnetorquer-xy-2u-v2r1.1
-
+```text
+bac-dev-adc-magnetorquer-xy-2u-v2r1.1
 bac-edu-kit-1u5-v2r4
-
 bac-flight-kit-2u-v1r0-exolaunch
-
 bac-merch-rbftag-logo-v1r0-m
-
 bac-merch-shirt-galaxy-v1r0-eu
+```
 
-
+
 
 When a tool reads or writes SKUs, validate against this pattern before passing them to any API. A SKU that does not match the scheme is an error, not a warning.
 
@@ -344,7 +350,7 @@ Implementation requirements in this guide are limited to the stack in Section 3.
 
 Use InquirerPy when a step benefits from guided input:
 
-```python
+```python
 from InquirerPy import inquirer
 
 # Arrow-key selection
@@ -366,7 +372,7 @@ if not inquirer.confirm(message="Apply this plan?", default=False).execute():
     return
 ```
 
-
+
 
 Criteria follow the BAC Interface Design Guide; in CLI implementation use these thresholds:
 
@@ -388,7 +394,7 @@ Tools that have persistent settings (paths, API endpoints, preferences) should s
 
 Config file structure:
 
-```toml
+```toml
 # bac-toolname.toml
 # Build a CubeSat – toolname configuration
 
@@ -401,11 +407,11 @@ bucket = "cubesat-resources-prod"
 gcs_prefix = "resources"
 ```
 
-
+
 
 Loading pattern:
 
-```python
+```python
 import tomllib
 from pathlib import Path
 
@@ -419,7 +425,7 @@ def load_config(path: Path | None = None) -> dict:
         return tomllib.load(f)
 ```
 
-
+
 
 Do not use YAML for config files. Do not commit config files containing live paths or credentials to the repository.
 
@@ -433,7 +439,7 @@ Preferred approach:
 
 2.  Load with python-dotenv:
 
-```python
+```python
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -444,7 +450,7 @@ def load_env(env_file: Path | None = None) -> None:
         load_dotenv()  # searches current dir and parents
 ```
 
-
+
 
 3.  Expose a --env-file PATH flag, see Section 3.3, to let users specify a non-default .env.
 
@@ -452,7 +458,7 @@ def load_env(env_file: Path | None = None) -> None:
 
 Commit the .env template as .env.example without values:
 
-```text
+```text
 # Build a CubeSat – toolname secrets
 # Copy to .env and fill in values. Never commit .env.
 GOOGLE_APPLICATION_CREDENTIALS=
@@ -460,7 +466,7 @@ GCS_BUCKET_NAME=
 LLM_API_KEY=
 ```
 
-### 3.8 Error Handling and Exit Codes
+### 3.8 Error Handling and Exit Codes
 
 | **Exit code** | **Meaning**                                |
 |---------------|--------------------------------------------|
@@ -476,12 +482,12 @@ LLM_API_KEY=
 
 - Error presentation follows the Interface Guide. Canonical Rich rendering:
 
-```text
+```text
 [#E94538]ERROR[/] Short description of what failed.
       Suggestion or detail, indented to align.
 ```
 
-### 3.9 --help Output
+### 3.9 --help Output
 
 - Fits on one screen: 24 lines at 80 columns for the root help and for a subcommand with few options. A subcommand whose options are the tool's whole vocabulary may use up to 48 lines, with the examples still at the end and every option's help under about 45 characters so it stays on one line.
 
@@ -497,7 +503,7 @@ LLM_API_KEY=
 
 ### 3.10 pyproject.toml Conventions
 
-```toml
+```toml
 [project]
 name = "bac-toolname"
 version = "0.1.0"
@@ -518,7 +524,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 ```
 
-
+
 
 - Tool names use the bac- prefix.
 
@@ -839,15 +845,14 @@ Notebooks are exempt from -v and --help; the version is TOOL_VERSION in the cons
 
 Each tool registers as a named sub-panel. The VSE Tools collection (bac-vse-tools) has three:
 
-VSE Tools tab
-
+```text
+VSE Tools tab
 └─ Bulk Import (sub-panel)
-
 └─ Sequential Proxies (sub-panel)
-
 └─ Strip Utilities (sub-panel)
+```
 
-
+
 
 Each sub-panel contains:
 
@@ -863,7 +868,7 @@ This order – description, button, properties – is fixed. Do not put properti
 
 Full-width, single row. Icon on the left; descriptive text label. Technical constraints may appear in parentheses in the label text:
 
-```python
+```python
 row = layout.row()
 row.operator(
     "sequencer.bac_bulk_import",
@@ -879,11 +884,11 @@ row.operator(
 )
 ```
 
-### 5.4 Property Rows
+### 5.4 Property Rows
 
 Properties are displayed as key-value rows directly below the operator button. Logically paired, short properties may share a single row:
 
-```python
+```python
 # Paired row
 row = layout.row()
 row.prop(props, "pause_seconds")      # displays as "Pause (s)" 0.10
@@ -893,7 +898,7 @@ row.prop(props, "retries_per_file")   # displays as "Retries per File" 2
 layout.prop(props, "min_length")      # displays as "Minimum Length (s)" 5.00
 ```
 
-
+
 
 Values are right-aligned by Blender's default prop() rendering. Do not override this.
 
@@ -979,7 +984,7 @@ Values are right-aligned by Blender's default prop() rendering. Do not override 
 
 | **Version** | **Date** | **Change** |
 |------------|-------------|-----------------------------------------------------------------|
-| 0.16        | 2026-10-29 | The governance alignment of the 2026-10-24 docs stock-take. Section 2.1: mechanical parts and bac-structure named under CERN OHL-S 2.0; documentation follows the design it describes, standalone prose is CC BY-SA 4.0, bac-software adds LICENSE-CC-BY-SA-4.0; the legacy-license clause, bac-hardware's single license text and the bac-structure relicense; the copyright line for the Codeberg repositories, the GitHub repositories keeping their nihil.space GmbH line, bac-ops all rights reserved; the bac.page link as Source Location. Section 2.2: merge commits (--no-ff), never squash, never rebase a tagged branch, replacing fast-forward; the BAC-FSW and BAC-SBC documents keep their own versions. Section 2.3: nihil.space GmbH only, the LLC a registered alias. Section 2.4: docs.buildacubesat.space. Sections 2.5, 4.3, 5.1 and 6: Title Case everywhere, the Blender and marimo exceptions retired. Section 2.6: no trailing period on subsection numbers. Section 2.7: YAML for mkdocs.yml and workflow files. Section 2.8: bac-design holds the guides, the checklists and PDF exports; bac-ops, private, in the Codeberg table. Section 2.9: the SKU examples in lowercase, 1u5 for a fractional form factor. New Section 2.11: status labels. Section 6: docs-site pages without a versioned subject take their history from git; American spelling. Section 7: items 1 and 7 updated, items 14 and 15. American spelling throughout. |
+| 0.16        | 2026-10-29 | The governance alignment of the 2026-10-24 docs stock-take. Section 2.1: mechanical parts and bac-structure named under CERN OHL-S 2.0; documentation follows the design it describes, standalone prose is CC BY-SA 4.0, bac-software adds LICENSE-CC-BY-SA-4.0; the legacy-license clause, bac-hardware's single license text and the bac-structure relicense; the copyright line for the Codeberg repositories, the GitHub repositories keeping their nihil.space GmbH line, bac-ops all rights reserved; the bac.page link as Source Location. Section 2.2: merge commits (--no-ff), never squash, never rebase a tagged branch, replacing fast-forward; the BAC-FSW and BAC-SBC documents keep their own versions. Section 2.3: nihil.space GmbH only, the LLC a registered alias. Section 2.4: docs.buildacubesat.space. Sections 2.5, 4.3, 5.1 and 6: Title Case everywhere, the Blender and marimo exceptions retired. Section 2.6: no trailing period on subsection numbers. Section 2.7: YAML for mkdocs.yml and workflow files. Section 2.8: bac-design holds the guides, the checklists and PDF exports; bac-ops, private, in the Codeberg table. Section 2.9: the SKU examples in lowercase, 1u5 for a fractional form factor. New Section 2.11: status labels. Section 6: docs-site pages without a versioned subject take their history from git; American spelling. Section 7: items 1 and 7 updated, items 14 and 15. American spelling throughout. Code blocks: sixteen left as Google Docs code-block markers (U+EC03/U+EC02) fenced as Markdown. |
 | 0.15        | 2026-10-27 | The design rebase of Identity Guide 1.0 and Interface Design Guide 1.0 carried into tooling. Section 2.5: tokens.json in bac-utils is the executable token source; bac-design-tokens writes the gallery's and the bac-suite's tokens.css, the Rich colors and the marimo style cells, --check fails CI on a stale copy, and other repositories such as BAC Ground take a copy of the generated tokens.css. Section 2.8: the bac-utils row names the design tokens. Section 3.4: bac_common.ui's colors are generated – \#3FB950, \#E94538, \#F7D400. Section 3.8: the error rendering in the new red. Section 4.3: the canonical style cell rewritten – \#F9F9F9/#1F1E1D, \#3F3F3F/#E5E5E5, \#6D6D6D/#A9A8A6, Nunito Sans body and 500 headings, IBM Plex Mono for code only, 10px callouts – generated rather than copied; the stale third correction about .vega-embed removed (the rule left the notebooks on 2026-10-24). Section 4.5: chart text takes marimo's chart theme; the shared notebook palette and the new MUTED pair, both generated. Section 7: item 10 names the generated copies. Section 2.1 and Section 7: the BAC Marks are excluded from the open licenses and follow the new BAC Trademark Policy 1.0; repositories that ship logo artwork say so in their README. Section 2.8: the guides move to github.com/buildacubesat/bac-design. |
 | 0.14        | 2026-10-24 | The bac-utils homogenization written down. Section 2.3: the attribution rule for company, project and mixed fields (decided 2026-10-24). Section 2.7.1: the shared \[spacecraft\] and \[\[deployables\]\] tables, directions in letter form in the owning tool's table, panels matched to deployables by name (decided 2026-10-24). Section 2.2: git tags \<tool\>-v\<X.Y.Z\> where another repository pins a version; fast-forward merges. Section 2.6: lowercase axis letters in command-line values and file names. Section 2.7.1: the 500 km planning orbit. Section 2.8: the bac-utils row; bac.page renamed bac-page. Section 3.1: bac-common is the reference implementation. Section 3.3: -v and --debug universal, the other flags where they apply; stdout and -o for filters; skip-existing and --force for batch tools; the in-place editing rule (plan, show, confirm, .bak, span edits). Section 3.8: BacError and its subclasses instead of SystemExit. Section 3.9: 48 lines for a subcommand with many options; count on Python 3.11; Typer epilogs. Section 4.1.1: compiled models as offline tables. Section 4.3: the style cell's values copy the gallery's tokens.css; --text-muted is \#6C6B67/#A3A29C. Section 4.5: MUTED follows. Section 4.8: what the headless checks miss. New Section 4.9: notebooks in the repository – folder layout, the two bac.page links reading main, versioning, ruff exemptions. Section 5: the third sub-panel, modal operators, the extension's own labels and operator ids; the known deviation is gone.                                                                                                                                                                                                                                                             |
 | 0.13        | 2026-09-15 | Homogenization pass over the three marimo notebooks (link budget 0.7.0, optical payload 0.7.0, power budget 0.5.0), plus a presentation pass over the whole guide. Guide-wide: headings to title case, US spelling, section references spelled out rather than using the paragraph sign, markdown escape artifacts and stray hard line breaks removed, bold reduced. Section 2.5: recorded the marimo title-case exception beside the Blender one. Section 2.6: axis directions never use sign notation; the thousands separator is display only. Section 2.7: added 2.7.1, the shared TOML mission profile contract, with normative key names for \[orbit\], \[ground_station\], \[target\] and \[map\], the \[results.\<tool\>\] convention, per-row results and author detection. Section 4.1: pyarrow\>=15.0 for notebooks that show tables. Section 4.1.1: molab keeps PEP 723 bounds as written. Section 4.2: the header-cell recipe and the 21-step reference cell order, the two constraints that force the splits, and the dataflow-ordering note for the export cell. Section 4.3: the canonical style cell including the .vega-embed rule and comments for all three corrections; title case; matter-of-fact titles; US spelling. Section 4.4: clamping helpers, data_editor validation, preset versus profile resolution, the sidebar pattern, the two-column panel default and the mo.ui.number separator limitation. Section 4.5: the shared chart-conventions cell, the 5'000-row transformer cap, the log-axis-with-zero failure, and 4.5.1, the map recipe with the date-line split. Section 4.6: gray headline cards with callouts doing the judging, fixed callout kinds, cross-tool callout naming. New Section 4.7 for profiles, exports and reports. New Section 4.8 for notebook tooling and testing. |
