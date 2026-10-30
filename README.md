@@ -6,7 +6,7 @@ Build a CubeSat – the design guides: the normative text for the BAC identity, 
 
 | Guide | Version | Governs |
 | :-- | :-- | :-- |
-| [BAC Identity Guide](guides/bac-identity-guide.md) | 1.4 | Brand, voice, typography, color, form, imagery, the Ops and Mission modes |
+| [BAC Identity Guide](guides/bac-identity-guide.md) | 1.5 | Brand, voice, typography, color, form, imagery, the Ops and Mission modes |
 | [BAC Interface Design Guide](guides/bac-interface-design-guide.md) | 1.1 | Interaction, the five-state system, accessibility, components, data visualization, the terminal profile, physical indicators |
 | [BAC Project & Tooling Guide](guides/bac-project-and-tooling-guide.md) | 0.17 | Licensing, versioning, repositories, data formats, status labels, CLI and marimo implementation, documentation process |
 | [BAC Project & Tooling Guide – condensed](guides/bac-project-and-tooling-guide-condensed.md) | follows the three above | The checklist used when reviewing tools |
@@ -44,6 +44,7 @@ The guides and this README are licensed CC BY-SA 4.0. The Build a CubeSat name, 
 
 | Version | Date | Change |
 | :-- | :-- | :-- |
+| 1.4.2 | 2026-10-30 | Identity Guide 1.5: the gallery symbol in §10. This README restored after the 1.4.1 merge carried the 1.3.0 version back. |
 | 1.4.1 | 2026-10-30 | Project & Tooling Guide 0.17: bac-ops on GitHub. |
 | 1.4.0 | 2026-10-30 | `templates/`: the slides template at v1r2 (Mission surfaces, the nebula, timeline and quote reworked). `exports/`: the seven guides rebuilt by `bac-design-export` 0.1.0 as BAC documents (A4, Nunito Sans and IBM Plex Mono embedded), replacing the pandoc → docx → LibreOffice exports. Identity Guide 1.4 (§7.2 slides v1r2, §7.3 documents, the tagline as "Space for everyone."). Project & Tooling Guide: sixteen code blocks left as Google Docs markers fenced as Markdown. |
 | 1.3.0 | 2026-10-29 | The governance alignment of the 2026-10-24 docs stock-take: Project & Tooling Guide 0.16, Identity Guide 1.3, Interface Design Guide 1.1, Trademark Policy 1.2. The Project Overview (0.4) and the Rocinante naming note (0.2) moved in from Google Drive; `checklists/` with the hardware and video release checklists. Title Case headings and American spelling. |

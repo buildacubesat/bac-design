@@ -1,6 +1,6 @@
 # BAC Identity Guide
 
-**Build a CubeSat – Brand, visual & communication standard** Version 1.3, 2026-10-29
+**Build a CubeSat – Brand, visual & communication standard** Version 1.5, 2026-10-30
 
 > **Space for everyone.** This guide is the authoritative source for the Build a CubeSat (BAC) identity: brand usage, voice and tone, typography, color, form, imagery, graphic language, and the Ops/Mission communication modes. It is written so a human or an LLM can reproduce BAC's identity without a visual reference.
 >
@@ -337,15 +337,31 @@ Product sheets are a print-first surface, so treat paper as the primary target:
 
 ### 7.2 Letterhead and Slides
 
-The letterhead and the slides template in bac-design `templates/` (v1r1; the Project & Tooling Guide's `v<version>r<revision>`) are the identity applied to the two documents everyone writes, built against the Reference Gallery's document family and product sheet.
+The letterhead (v1r1) and the slides template (v1r2) in bac-design `templates/` (versioned as the Project & Tooling Guide's `v<version>r<revision>`) are the identity applied to the two documents everyone writes, built against the Reference Gallery's document family and product sheet.
 
 - **The kicker is a brand mark.** Every slide and every letter opens with the short BAC Yellow dash (18 × 4 px, rounded 2) before a strong, uppercase IBM Plex Mono eyebrow that names the context – deck type and date, subject or reference. The kicker stays yellow on both surfaces; the eyebrow takes `--text-strong` on paper and `--mission-rose-on-dark` on the Mission hero. The dash is not the one dominant yellow of the slide.
 
 - **Letterhead (Ops).** A4 only, English and German. Nunito Sans 400 at 10.5 pt for the letter, IBM Plex Mono at 8 pt with `--ls-label` for the address block, the date and reference table, the eyebrow, the signature role and the footer; the subject in Nunito Sans 500 at 14 pt. The logo at 40 mm, its height from the file's own aspect. Spacing on the 4 px grid. Footer: a `--border-strong` hairline over the contact line and the UID, `Page x of y` right. The address is `hello@buildacubesat.space`, the date `Bern, YYYY-MM-DD`; the German uses ss, the Gedankenstrich and `Freundliche Grüsse`.
 
-- **Slides.** 16:9, importable into Google Slides, twelve named layouts with placeholders. Ops layouts are white with the monochrome hierarchy; the Mission layouts (title, section, closing) sit on the dark hero – `--space-ink` with soft teal and violet light, a restrained starfield and orbital rings – and the title carries the recessed viewport as the product-render slot. Type at body 16 pt = 1 rem: titles 40–44 pt, content titles 32 pt, the section numeral `--text-5xl` in mono, stat figures in mono; display type Nunito Sans 500 with `--ls-tight`. Photo slots – half-bleed on the title, a sunken frame with a mono caption on image-and-caption – are for hardware photography (§6). One hero card per deck (§6). The closing slide carries the logo with tagline lockup (§8), never the tagline as a free line.
+- **Slides.** 16:9, importable into Google Slides, thirteen named layouts with placeholders. Slides are a presentation surface, so Mission: the light layouts sit on `--space-paper` with paper wells that may carry a teal, violet or rose top rule; the dark layouts (title, section, title-only, closing) sit on the nebula, and the title carries the recessed viewport as the product-render slot. Type at body 16 pt = 1 rem: titles 40–44 pt, content titles 32 pt, the section numeral `--text-5xl` in mono, stat figures in mono; display type Nunito Sans 500 with `--ls-tight`. Photo slots – half-bleed on the title and the quote, a paper well with a mono caption on image-and-caption – are for hardware photography (§6). A timeline marks done steps in Orbital Teal, the current one in BAC Yellow and the steps ahead hollow. One hero card per deck (§6). The quote opens with a Plasma Rose mark. The closing slide carries the logo with tagline lockup (§8), never the tagline as a free line.
 
 - Templates are generated, never edited by hand: `bac-brand-assets` in bac-utils writes them, the Mission surfaces rendered from the gallery's CSS; a change goes into the generator and moves the revision. bac-design `templates/README.md` lists every construction value.
+
+### 7.3 Documents
+
+Guides, policies, checklists and other text documents handed out as PDF are Ops surfaces and print-first. The Markdown stays authoritative; the PDF is generated from it by `bac-design-export` in bac-utils and never edited by hand.
+
+- **Page.** A4 portrait first, US Letter second. Margins 18 mm top and bottom, 16 mm left and right; the running header and footer sit in the margins. Fonts embedded, subset.
+
+- **Page one.** The logo (13 mm high), then the kicker and a strong mono eyebrow with the version and date (`VERSION 1.4 · 2026-10-30`), the title in Nunito Sans 500 at 30 pt with `--ls-tight`, the lead – the document's standard line – at 12.5 pt, a mono meta line where the document names authors, and the contents with page numbers for a document of three or more sections. The body starts on page two.
+
+- **Body.** Nunito Sans 400 at 9.5 pt on `--lh-normal`. Section headings in Nunito Sans 500: 15 pt over a 1.5 px `--text-strong` rule, then 11.5 pt and 10 pt; the section number in IBM Plex Mono, `--text-muted`.
+
+- **Running header and footer**, IBM Plex Mono at 7 pt in `--text-muted` – the only text under the 8.5 pt print minimum of §7.1. Header from page two: the document name in uppercase left, version and date right. Footer: the repository and license line left, page x / y right.
+
+- **Elements.** Tables as in §5.4: uppercase mono header labels over a 1.5 px `--text-strong` rule, hairline rows, no fills, no outer border, 8.5 pt. Code in IBM Plex Mono at 8 pt on `--surface-sunken` with 6 px corners. A callout (a Markdown blockquote) is a hairline card in `--border-strong` with 10 px corners, not a quote bar. Bullets are a short `--text-muted` dash. Links in `--link`.
+
+- **No Mission surface.** No dark ink, no nebula color, no shadows. Every color, family, weight and radius comes from the tokens; only the print sizes above are set for paper.
 
 ## 8. Iconography & Graphic Language
 
@@ -361,12 +377,14 @@ The letterhead and the slides template in bac-design `templates/` (v1r1; the Pro
 
 - **Semantic symbols** (text, not icons): ✓ pass, ✗ fail, ! warn, → progression, , or · separator. Their interface semantics are defined in the BAC Interface Design Guide.
 
+  **To be decided – glyph coverage.** None of the three BAC families has ✗, nor any other cross mark (✔ ✕ ✖ ✘); the only cross they share is ×, which §2 reserves for quantities. Until this is decided, ✓ and ✗ render in the surface's system font, as a pair – in the guide PDFs, on the web and in Google Slides alike – and no custom symbol font is made for them (decided 2026-10-30). Arrows and box drawing come from IBM Plex Mono.
+
 - **Brand marks, v4r1.** Three marks, versioned together like hardware (`v<version>r<revision>`, Project & Tooling Guide §2.2) and supplied as black, white and `currentColor` SVG in bac-design `assets/`; written by `bac-brand-assets` in bac-utils from the construction below, never edited by hand. Black and white only, never recolored; `currentColor` is for inlining in HTML, where the mark takes the color of its text.
 
   - **Symbol** – an isometric 2U cube: a 1 × 1 × 2 box in true 30° projection, cube edge 200 on a 400 × 650 canvas (346.41 wide, 600 tall, centered). One hexagonal outline with its six corners rounded 5 from the vertex; the inner edges – the top face's lower edges, the center vertical, the lower cube's top face – as a second path; a filled dot at the center of the top face, an ellipse 60 × 34.64 (the 1:√3 ratio of a circle in isometric projection). Stroke 15, round joins and caps, no fill.
   - **Wordmark** – BUILD A over CUBESAT in Nunito 350, uppercase, tracking −0.03 em, cap height 100 and 150 from baseline to baseline, the first line justified to the width of the second; outlined, so the files carry no font.
   - **Logo** – the horizontal lockup: the symbol on its canvas, the wordmark 70 to its right, scaled so its two-line block is 70 % of the cube height and centered on the cube. There is no stacked lockup.
-  - **Logo with tagline** – the logo with SPACE FOR EVERYONE under the wordmark: IBM Plex Mono, 0.286 em tracking, sized to 72 % of the wordmark's width and centered under it with a rule either side filling the rest – the setting the Rocinante subtitle uses – the block of both centered on the cube. The tagline is set only in this lockup, never in Nunito and never alone as a mark; as prose it reads *Space is for everyone.*
+  - **Logo with tagline** – the logo with SPACE FOR EVERYONE under the wordmark: IBM Plex Mono, 0.286 em tracking, sized to 72 % of the wordmark's width and centered under it with a rule either side filling the rest – the setting the Rocinante subtitle uses – the block of both centered on the cube. The tagline is set only in this lockup, never in Nunito and never alone as a mark; as prose it reads *Space for everyone.*
   - **Badges** – the symbol on a filled rounded hexagon (the cube's silhouette grown by 70, corners rounded 60, a `--border-strong` hairline) and the logo on that hexagon merged with a rounded rectangle at the same offset around the wordmark, the merge filleted, white for light surfaces and `--bg` dark for dark ones; for stickers, avatars and anything on a colored or photographic background, where the plain marks would lose their edge.
   - **Rocinante** – the flight software stack's own marks: the horse head in a ring with three gaps, ROCINANTE in Nunito over CUBESAT SOFTWARE STACK in IBM Plex Mono, and their stacked lockup, at v2r1 in bac-design `assets/` (`rocinante-*`). Monochrome like the BAC marks, plus a two-tone in brand colors: `--text-strong` for head and word, `--bac-blue` for ring and subtitle.
 
@@ -426,7 +444,7 @@ Current exemplar families include:
 
 - Fonts load from Google Fonts CDN or are self-hosted from bac-design `fonts/` where a surface must work offline. Moon 2.0 is retired.
 
-- The official marks are the v4r1 files in bac-design `assets/` (`bac-symbol-*-v4r1.svg`, `bac-wordmark-*-v4r1.svg`, `bac-logo-*-v4r1.svg`, nihil.space GmbH); the reference gallery ships the symbol as `assets/bac-symbol.svg`. Official hardware photography should replace the illustrative renders when available.
+- The official marks are the v4r1 files in bac-design `assets/` (`bac-symbol-*-v4r1.svg`, `bac-wordmark-*-v4r1.svg`, `bac-logo-*-v4r1.svg`, nihil.space GmbH); the reference gallery ships an unchanged copy of `bac-symbol-currentcolor-v4r1.svg`. Official hardware photography should replace the illustrative renders when available.
 
 ## 11. Quick Reference – The Non-Negotiables
 
@@ -466,6 +484,8 @@ The BAC governance guides are independently versioned. Product and subsystem doc
 
 | **Version** | **Date** | **Change** |
 |------------|-------------|-----------------------------------------------------------------|
+| 1.5 | 2026-10-30 | §10: the reference gallery ships an unchanged copy of the generated symbol file. |
+| 1.4 | 2026-10-30 | §7.2: the slides template at v1r2 – Mission throughout, the light layouts on paper with wells and nebula top rules, the dark layouts on the nebula, the timeline and quote treatments, thirteen layouts. §8: the tagline as prose reads *Space for everyone.*; glyph coverage of ✓ and ✗ recorded as to be decided, system font until then New §7.3: documents – the print spec of the guide PDFs, generated from the Markdown by `bac-design-export` (A4 first, page one with logo, kicker, eyebrow, title, lead and contents, the body type and heading sizes, running header and footer, tables, code and callouts, Ops only). |
 | 1.3 | 2026-10-29 | The governance alignment of the 2026-10-24 docs stock-take. §1: nihil.space GmbH as the only legal entity; the timeline snapshot without its forward-looking entry; no price in the catalog line – prices belong on the storefront. The slogan shortened to "Space for everyone", matching the tagline. §2: Title Case for headings, titles and labels everywhere, replacing sentence case and its Blender and marimo exceptions; American spelling. Headings to Title Case and American spelling throughout. |
 | 1.2 | 2026-10-28 | §7.2: the letterhead (A4, EN and DE) and the slides template (16:9, twelve layouts) at v1r1 in bac-design `templates/`, generated by `bac-brand-assets`; the kicker as a brand mark, the Mission hero and viewport on the dark layouts, the type scale at body 16 pt, photo slots, the tagline lockup on the closing slide. |
 | 1.1 | 2026-10-27 | §8: the marks at v4r1 – the symbol's construction (true 30° isometric 2U cube, edge 200, stroke 15, corners rounded 5, the dot 60 × 34.64 on a 400 × 650 canvas), the wordmark in Nunito 350 with −0.03 em tracking, the logo as the horizontal lockup at 70 % of the cube height and gap 70, the logo with tagline, the badges, and the Rocinante marks at v2r1; black, white and `currentColor` files in bac-design `assets/`, written by `bac-brand-assets`; no stacked lockup. §3: the wordmark weight, 350 added to the Nunito import, the self-hosted fonts in bac-design `fonts/`. §10: the file names. |
