@@ -2,44 +2,50 @@
 
 Build a CubeSat – the design guides: the normative text for the BAC identity, its interfaces, its tooling conventions and the use of its name and marks. Everything that renders or implements the design – the tokens, the reference gallery, the tools – lives in [bac-utils](https://github.com/buildacubesat/bac-utils) and follows the text here. If a rendered thing and a guide disagree, the guide wins.
 
-## 1. The guides
+## 1. The Guides
 
 | Guide | Version | Governs |
 | :-- | :-- | :-- |
-| [BAC Identity Guide](guides/bac-identity-guide.md) | 1.2 | Brand, voice, typography, colour, form, imagery, the Ops and Mission modes |
-| [BAC Interface Design Guide](guides/bac-interface-design-guide.md) | 1.0 | Interaction, the five-state system, accessibility, components, data visualisation, the terminal profile, physical indicators |
-| [BAC Project & Tooling Guide](guides/bac-project-and-tooling-guide.md) | 0.15 | Licensing, versioning, repositories, data formats, CLI and marimo implementation, documentation process |
+| [BAC Identity Guide](guides/bac-identity-guide.md) | 1.4 | Brand, voice, typography, color, form, imagery, the Ops and Mission modes |
+| [BAC Interface Design Guide](guides/bac-interface-design-guide.md) | 1.1 | Interaction, the five-state system, accessibility, components, data visualization, the terminal profile, physical indicators |
+| [BAC Project & Tooling Guide](guides/bac-project-and-tooling-guide.md) | 0.16 | Licensing, versioning, repositories, data formats, status labels, CLI and marimo implementation, documentation process |
 | [BAC Project & Tooling Guide – condensed](guides/bac-project-and-tooling-guide-condensed.md) | follows the three above | The checklist used when reviewing tools |
-| [BAC Trademark Policy](guides/bac-trademark-policy.md) | 1.1 | How others may use the Build a CubeSat name and marks |
+| [BAC Trademark Policy](guides/bac-trademark-policy.md) | 1.2 | How others may use the Build a CubeSat and Rocinante names and marks |
+| [BAC Project Overview](guides/bac-project-overview.md) | 0.4 | What BAC is, its principles, architecture and open-source model; where authoritative detail lives |
+| [Rocinante / Roci Naming Note](guides/bac-rocinante-naming.md) | 0.2 | How the flight software stack is named in prose, code and documents |
 
-Each guide is independently versioned and carries its own version history. `guides/` holds the Markdown source and is what to read and edit. `exports/` holds a PDF of each guide for handing to people outside git, regenerated on every change (`pandoc guides/<name>.md -o <name>.docx` with the reference document, then `soffice --headless --convert-to pdf`).
+Each guide is independently versioned and carries its own version history. `guides/` holds the Markdown source and is what to read and edit. `exports/` holds a PDF of each guide for handing to people outside git. The PDFs follow Identity Guide §7.3 and are built Markdown → HTML → PDF by [`bac-design-export`](https://github.com/buildacubesat/bac-utils/tree/main/tools/bac-design-export) in bac-utils (`bac-design-export` from beside this checkout; `--check` reports a stale export). The Markdown is authoritative.
 
-## 2. Where the executable side lives
+`checklists/` holds the release procedures: [hardware](checklists/bac-hardware-release-checklist.md) and [video](checklists/bac-video-release-checklist.md). They follow the guides and take their history from git.
 
-- `tokens.json`, the canonical copy of the Identity and Interface guides' tokens, and `bac-design-tokens`, which writes every stylesheet, terminal colour and notebook style cell from it: [bac-utils/tools/bac-design-tokens](https://github.com/buildacubesat/bac-utils/tree/main/tools/bac-design-tokens).
+## 2. Where the Executable Side Lives
+
+- `tokens.json`, the canonical copy of the Identity and Interface guides' tokens, and `bac-design-tokens`, which writes every stylesheet, terminal color and notebook style cell from it: [bac-utils/tools/bac-design-tokens](https://github.com/buildacubesat/bac-utils/tree/main/tools/bac-design-tokens).
 - The reference gallery, seven boards that show the guides applied: [bac-utils/tools/bac-reference-gallery](https://github.com/buildacubesat/bac-utils/tree/main/tools/bac-reference-gallery).
 - BAC Ground, the mission-operations console whose language the 1.0 guides adopted.
 
 A change of meaning – a new rule, a retired token – is made here first; the value then changes in `tokens.json` in the same change set.
 
-## 3. Brand assets
+## 3. Brand Assets
 
-`assets/` holds the official Build a CubeSat symbol, wordmark and logo at v4r1 (plus the logo with tagline and the badges) and the Rocinante marks at v2r1, as black, white and `currentColor` SVG; [`assets/README.md`](assets/README.md) lists the files and their construction. They are BAC Marks under the Trademark Policy and are not covered by this repository's licence. The files are written by [`bac-brand-assets`](https://github.com/buildacubesat/bac-utils/tree/main/tools/bac-brand-assets) in bac-utils from the construction the Identity Guide §8 states, never edited by hand.
+`assets/` holds the official Build a CubeSat symbol, wordmark and logo at v4r1 (plus the logo with tagline and the badges) and the Rocinante marks at v2r1, as black, white and `currentColor` SVG; [`assets/README.md`](assets/README.md) lists the files and their construction. They are BAC Marks under the Trademark Policy and are not covered by this repository's license. The files are written by [`bac-brand-assets`](https://github.com/buildacubesat/bac-utils/tree/main/tools/bac-brand-assets) in bac-utils from the construction the Identity Guide §8 states, never edited by hand.
 
 `fonts/` holds the self-hosted copies of the three families (Nunito, Nunito Sans, IBM Plex Mono; OFL 1.1) that offline surfaces and the tools use; see [`fonts/README.md`](fonts/README.md).
 
 ## 4. Templates
 
-`templates/` holds the Build a CubeSat letterhead (A4, English and German) and the 16:9 slides template at v1r1 – the identity applied to the two documents everyone writes, per Identity Guide §7.2; [`templates/README.md`](templates/README.md) lists the layouts and every construction value and says how to start a letter or a deck. They are generated by [`bac-brand-assets`](https://github.com/buildacubesat/bac-utils/tree/main/tools/bac-brand-assets) in bac-utils and never edited by hand; a change goes into the generator and moves the revision.
+`templates/` holds the Build a CubeSat letterhead (A4, English and German) and the 16:9 slides template (letterhead v1r1, slides v1r2) – the identity applied to the two documents everyone writes, per Identity Guide §7.2; [`templates/README.md`](templates/README.md) lists the layouts and every construction value and says how to start a letter or a deck. They are generated by [`bac-brand-assets`](https://github.com/buildacubesat/bac-utils/tree/main/tools/bac-brand-assets) in bac-utils and never edited by hand; a change goes into the generator and moves the revision.
 
 ## 5. License
 
 The guides and this README are licensed CC BY-SA 4.0. The Build a CubeSat name, the abbreviation BAC, the symbol, wordmark and logo are not: they are BAC Marks of nihil.space GmbH, and their use is governed by the [BAC Trademark Policy](guides/bac-trademark-policy.md). Describing a mark in a guide does not license it. The fonts in `fonts/` keep their SIL Open Font License 1.1. See `LICENSE.md`.
 
-## 6. Version history
+## 6. Version History
 
 | Version | Date | Change |
 | :-- | :-- | :-- |
+| 1.4.0 | 2026-10-30 | `templates/`: the slides template at v1r2 (Mission surfaces, the nebula, timeline and quote reworked). `exports/`: the seven guides rebuilt by `bac-design-export` 0.1.0 as BAC documents (A4, Nunito Sans and IBM Plex Mono embedded), replacing the pandoc → docx → LibreOffice exports. Identity Guide 1.4 (§7.2 slides v1r2, §7.3 documents, the tagline as "Space for everyone."). Project & Tooling Guide: sixteen code blocks left as Google Docs markers fenced as Markdown. |
+| 1.3.0 | 2026-10-29 | The governance alignment of the 2026-10-24 docs stock-take: Project & Tooling Guide 0.16, Identity Guide 1.3, Interface Design Guide 1.1, Trademark Policy 1.2. The Project Overview (0.4) and the Rocinante naming note (0.2) moved in from Google Drive; `checklists/` with the hardware and video release checklists. Title Case headings and American spelling. |
 | 1.2.0 | 2026-10-28 | `templates/`: the letterhead (EN, DE) and the slides template at v1r1, generated by `bac-brand-assets`. Identity Guide 1.2 (§7.2 letterhead and slides). |
 | 1.1.0 | 2026-10-27 | The marks: `assets/` with the symbol, wordmark and logo at v4r1 (black, white, `currentColor`), the logo with tagline, the badges and the Rocinante marks at v2r1, written by `bac-brand-assets`; `fonts/` with the self-hosted Nunito, Nunito Sans and IBM Plex Mono. Identity Guide 1.1 (§8 construction of the marks, §3 wordmark weight and fonts) and Trademark Policy 1.1 (symbol, wordmark, logo). |
 | 1.0.0 | 2026-10-27 | First release: the five guides moved out of Google Drive at Identity 1.0, Interface Design 1.0, Project & Tooling 0.15 and Trademark Policy 1.0, with PDF exports. |

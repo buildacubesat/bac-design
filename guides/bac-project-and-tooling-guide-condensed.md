@@ -1,19 +1,23 @@
 # BAC Guide Rules – Condensed Checklist for Reviewing Utils
 
-- Source: BAC Project & Tooling Guide v0.15 (2026-10-27), BAC Interface Design Guide v1.0 (2026-10-27) and BAC Identity Guide v1.0 (2026-10-27) and BAC Trademark Policy v1.0 (2026-10-27).
+- Source: BAC Project & Tooling Guide v0.16 (2026-10-29), BAC Interface Design Guide v1.1 (2026-10-29), BAC Identity Guide v1.4 (2026-10-30) and BAC Trademark Policy v1.2 (2026-10-29).
 
 ## Project-Wide
 
-- License: software MIT; pyproject.toml has license = { text = "MIT" }. Docs CC BY-SA 4.0, hardware CERN OHL-S 2.0.
-- Brand marks (name, BAC, cube mark, wordmark, lockup) are not openly licensed: BAC Trademark Policy. A repository that ships logo artwork says so in its README's licence section.
+- License: software MIT; pyproject.toml has license = { text = "MIT" }. Hardware CERN OHL-S 2.0, mechanical parts and bac-structure included. Docs CC BY-SA 4.0, except READMEs and instructions that belong to a design, which follow its repository. Copyright line: Copyright (c) \<years\> nihil.space GmbH and Build a CubeSat contributors on the open Codeberg repositories; the GitHub repositories keep their nihil.space GmbH line; bac-ops (private) is all rights reserved.
 
-- Software versioning: SemVer, displayed with a v prefix (bac-toolname v0.1.0). Hardware: v\<version\>r\<revision\>\[.\<patch\>\]\[-\<variant\>\]. Git tags \<tool\>-v\<X.Y.Z\> only where another repo pins the version; fast-forward merges, never squash.
+- Legal entity: nihil.space GmbH only; never the LLC.
+- Brand marks (name, BAC, cube mark, wordmark, lockup) are not openly licensed: BAC Trademark Policy. A repository that ships logo artwork says so in its README's license section.
+
+- Software versioning: SemVer, displayed with a v prefix (bac-toolname v0.1.0). Hardware: v\<version\>r\<revision\>\[.\<patch\>\]\[-\<variant\>\]. Git tags \<tool\>-v\<X.Y.Z\> only where another repo pins the version; merge commits (git merge --no-ff), never squash, never rebase a tagged branch.
 
 - Attribution fields: legal-entity field → nihil.space GmbH; project field → Build a CubeSat; one mixed field → Build a CubeSat by nihil.space GmbH. KiCad Company, STEP organization, 3MF Designer are entity fields; STL has none.
 
 - Naming: "Build a CubeSat" on first reference, "BAC" thereafter, never Bac or BaC. Lowercase bac- in code and filenames; never mixed case.
 
-- Typography: Gedankenstrich (–) only, never em dash (—). Straight apostrophes. ' thousands separator for CHF and metric, comma for USD. × not x. Decimal point. Headings numbered 1., 1.1.
+- Typography: Gedankenstrich (–) only, never em dash (—). Straight apostrophes. ' thousands separator for CHF and metric, comma for USD. × not x. Decimal point. Headings numbered 1., 1.1 – no trailing period on subsections.
+
+- Headings, titles and labels are Title Case everywhere (lowercase articles, conjunctions, short prepositions). American spelling everywhere: color, gray, behavior, license.
 
 - The thousands separator is display only. CSV, JSON and TOML carry plain unformatted numbers.
 
@@ -23,17 +27,19 @@
 
 - No emojis. Only semantic glyphs: ✓ pass, ✗ fail, ! warning, → progression, · or , separator.
 
-- Data formats: TOML for hand-edited config, CSV for tabular, JSON machine-to-machine, avoid YAML.
+- Status labels (Section 2.11): `DEVELOPMENT`, `TESTING`, `RELEASED`, `DEPRECATED`, `DO NOT USE`, `ARCHIVED`, `EXTERNAL` – uppercase words as inline code, each mapped to an Interface Guide state; never an emoji.
+
+- Data formats: TOML for hand-edited config, CSV for tabular, JSON machine-to-machine, avoid YAML except where a framework or service requires it (Zephyr, F´, mkdocs.yml, workflow files).
 
 - File naming for data files: {project}-{descriptor}-{YYYY-MM-DD}.{ext}; no version numbers in filenames.
 
-- Design tokens: tokens.json in bac-utils (tools/bac-design-tokens) is the executable source of the Identity Guide's tokens, MIT or CC BY-SA 4.0. bac-design-tokens writes the gallery's and bac-suite's tokens.css, the Rich colours in bac_common.ui and every marimo style cell; never edit a generated copy, run uv run --no-sync bac-design-tokens and commit; --check fails CI on a stale copy. Other repos (BAC Ground) take a copy of the generated tokens.css.
+- Design tokens: tokens.json in bac-utils (tools/bac-design-tokens) is the executable source of the Identity Guide's tokens, MIT or CC BY-SA 4.0. bac-design-tokens writes the gallery's and bac-suite's tokens.css, the Rich colors in bac_common.ui and every marimo style cell; never edit a generated copy, run uv run --no-sync bac-design-tokens and commit; --check fails CI on a stale copy. Other repos (BAC Ground) take a copy of the generated tokens.css.
 
 - Repos: Codeberg primary (codeberg.org/buildacubesat-project/...); GitHub only for bac-page, CubeSat-Resources, bac-utils and bac-design (the guides).
 
 - Time: UTC; Unix epoch machine-readable, ISO 8601 human-readable.
 
-- Every doc file has a version history section. Software docs such as READMEs follow the software version, with no separate doc version.
+- Every doc about a versioned thing has a version history section. READMEs and user guides follow their subject's version, with no separate doc version; BAC-FSW-\* and BAC-SBC-\* documents keep their own versions; docs-site pages without a versioned subject take their history from git (last-updated date).
 
 - SKUs: bac-\<cat\>-\<sub\>-\<name\>-\<versionstring\>\[-\<variant\>\], validated before API use.
 
@@ -87,11 +93,11 @@
 
 - Style cell is the canonical shared text, written by bac-design-tokens (never edited by hand; notebook-specific rules go after its last line): light-dark() rather than a prefers-color-scheme media query, --heading-font set or headings fall back to Lora, --bg light-dark(#F9F9F9, \#1F1E1D), --text light-dark(#3F3F3F, \#E5E5E5), --text-muted light-dark(#6D6D6D, \#A9A8A6), Nunito Sans for headings (500) and body, IBM Plex Mono for code only, 10px callouts, no .vega-embed rule (charts render on canvas in a shadow root).
 
-- Headings and callout titles are title case with lowercase articles, conjunctions and prepositions. Notebook copy uses US spelling.
+- Headings and callout titles are Title Case with lowercase articles, conjunctions and prepositions, as everywhere. Notebook copy uses American spelling.
 
 - UI elements: show_value=True on every slider, plus include_input=True where typed entry helps; numeric controls built through clamping N()/S() helpers, since an out-of-range value takes the panel cell down; data_editor values validated (finite numbers, tolerant \_flag() for checkboxes, duplicate names skipped and reported); a control's value is unreadable in its defining cell; preset-versus-profile resolved by comparing the preset's current value with what the profile said; sidebar switch pattern; two-column panel default with accordions for rarely-touched groups; mo.ui.number shows a comma separator and cannot be overridden.
 
-- Charts: alt.theme.enable(...), not the deprecated alt.themes.enable; width='container' does not cross alt.vconcat; downsample below Altair's 5'000-row transformer cap; a log axis dies on a 0 in the series; chart conventions live in one shared cell; the chart title carries the legend semantics; axis titles always explicit. Chart text, axes, ticks and subtitles carry no colour (marimo's chart theme sets them; labelColor, titleColor, domainColor, tickColor, subtitleColor are banned by a test). PALETTE is the shared notebook palette \["#2E7ED8", "#7D7D7D", "#9D7800", "#0E903A", "#E4463E"\] and MUTED = "#A9A8A6" if IS_DARK else "#6D6D6D", both generated.
+- Charts: alt.theme.enable(...), not the deprecated alt.themes.enable; width='container' does not cross alt.vconcat; downsample below Altair's 5'000-row transformer cap; a log axis dies on a 0 in the series; chart conventions live in one shared cell; the chart title carries the legend semantics; axis titles always explicit. Chart text, axes, ticks and subtitles carry no color (marimo's chart theme sets them; labelColor, titleColor, domainColor, tickColor, subtitleColor are banned by a test). PALETTE is the shared notebook palette \["#2E7ED8", "#7D7D7D", "#9D7800", "#0E903A", "#E4463E"\] and MUTED = "#A9A8A6" if IS_DARK else "#6D6D6D", both generated.
 
 - Maps: keyed CARTO tiles as mark_image with .scale(None), mercator scale = 256·2^z/(2π), clip=True on every layer, fixed 960 × 540 px, zoom slider, tiles-off switch with the Natural Earth coastline as fallback, legends orient="bottom", chart rendered bare because mo.ui.altair_chart refuses geoshapes, credit line underneath, ground tracks split on \|Δlon\| \> 180.
 
@@ -129,17 +135,17 @@
 
 - prefers-color-scheme by default, light when the system reports no preference (CSS cannot tell that case from light), with an optional \[data-theme\] override; test both. Inside marimo, follow marimo's own setting with light-dark() instead.
 
-- WCAG AA contrast (--text-muted \#6D6D6D/#A9A8A6, --link \#0B5CAD/#4C9AFF, status inks on their tints), focus is a 3 px solid --focus-ring outline (\#0B5CAD/#4C9AFF) with 2 px offset and no halo, prefers-reduced-motion respected, color never the only state channel – every state is colour + shape + word.
+- WCAG AA contrast (--text-muted \#6D6D6D/#A9A8A6, --link \#0B5CAD/#4C9AFF, status inks on their tints), focus is a 3 px solid --focus-ring outline (\#0B5CAD/#4C9AFF) with 2 px offset and no halo, prefers-reduced-motion respected, color never the only state channel – every state is color + shape + word.
 
 - Motion tokens: ease-standard cubic-bezier(0.2,0,0.1,1); durations 120/200/320 ms; no bounces or infinite loops.
 
-- States: nominal green \#3FB950 filled circle, caution yellow \#F7D400 triangle, alarm red \#E94538 square, info blue \#004C8B diamond, no data/planned grey dashed hollow circle; text uses the per-theme ink (green \#1A7F37/#3FB950, red \#C9302C/#FF5A4F, info \#0B5CAD/#4C9AFF, caution \#7A5F00/#F7D400). No functional amber; \#4277FD is retired, blue means info, links and focus.
+- States: nominal green \#3FB950 filled circle, caution yellow \#F7D400 triangle, alarm red \#E94538 square, info blue \#004C8B diamond, no data/planned gray dashed hollow circle; text uses the per-theme ink (green \#1A7F37/#3FB950, red \#C9302C/#FF5A4F, info \#0B5CAD/#4C9AFF, caution \#7A5F00/#F7D400). No functional amber; \#4277FD is retired, blue means info, links and focus.
 
-- Surfaces: --bg \#F9F9F9 light, \#1F1E1D dark; cards \#FFFFFF/#282726; wells lighter than the page in dark. Dark mode has no accent: grey primary buttons, neutral --accent-state; yellow means caution only. Light primary buttons are yellow with dark text.
+- Surfaces: --bg \#F9F9F9 light, \#1F1E1D dark; cards \#FFFFFF/#282726; wells lighter than the page in dark. Dark mode has no accent: gray primary buttons, neutral --accent-state; yellow means caution only. Light primary buttons are yellow with dark text.
 
 - Form: pill buttons, chips and tabs with uppercase IBM Plex Mono labels at 0.03em; 6px inputs, 10px cards; no shadows, no hover lifts. Body Nunito Sans 400, headings Nunito Sans 500, every number in mono tabular figures.
 
-- Charts: ops charts use the console plot colours (--chart-1..6, per theme; no --chart-4/-5 as plain series where the chart carries pass/fail); Mission charts the nebula triad (teal \#0E9594, violet \#7A5AF8, rose \#C64677, max three series); notebooks the shared palette.
+- Charts: ops charts use the console plot colors (--chart-1..6, per theme; no --chart-4/-5 as plain series where the chart carries pass/fail); Mission charts the nebula triad (teal \#0E9594, violet \#7A5AF8, rose \#C64677, max three series); notebooks the shared palette.
 
 - Icons: Lucide, inline SVG (no CDN script), 18px in icon buttons; status shapes are not icons. Containers 1200px (reading) and 1540px (dashboards). At most one info-blue hero card per view; its red rule is decorative.
 
@@ -149,11 +155,11 @@
 
 - VSE tools: bl_category = "VSE Tools"; non-VSE: bl_category = "BAC".
 
-- UI labels title case, a documented exception. No abbreviations unless standard Blender, such as FPS and AVI.
+- UI labels Title Case, as everywhere. No abbreviations unless standard Blender, such as FPS and AVI.
 
 - Three sub-panels: Bulk Import, Sequential Proxies, Strip Utilities. Sub-panel order is fixed: one-line layout.label description → full-width operator buttons with a built-in icon and text → property rows.
 
-- Property names snake_case; display names title case with units in parentheses ("Pause (s)"); description= required on every property, a complete sentence, no trailing period.
+- Property names snake_case; display names Title Case with units in parentheses ("Pause (s)"); description= required on every property, a complete sentence, no trailing period.
 
 - Destructive or long-running operators need a confirm dialog or a visible before/after indicator; long-running ones are modal timers (PASS_THROUGH, cancel(), settings in a scene property group), invoked with "INVOKE_DEFAULT".
 
