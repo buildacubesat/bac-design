@@ -1,6 +1,6 @@
 # BAC Project & Tooling Guide
 
-**Build a CubeSat – project, software and tooling standard.** Version 0.17, 2026-10-30
+**Build a CubeSat – project, software and tooling standard.** Version 0.18, 2026-11-01
 
 This document defines engineering, software, repository, data, and implementation conventions used across the BAC project. It is the primary reference for LLMs and human contributors when creating or updating project tooling and technical workflows. The goal is consistency, not uniformity – each tool context has its own implementation constraints, but project conventions remain predictable and maintainable.
 
@@ -24,29 +24,34 @@ These apply across all tool types.
 
 ### 2.1 Licensing
 
-Every BAC artifact is licensed as follows. Do not deviate.
+Every BAC artifact is licensed as follows. The license follows the repository, not the directory: a file takes the license of the repository it lives in. Do not deviate.
 
 | **Artifact type**                              | **License**    |
 |------------------------------------------------|----------------|
 | Hardware: schematics, PCB layouts, mechanical parts (bac-hardware, bac-structure) | CERN OHL-S 2.0 |
-| Software                                       | MIT License    |
+| Embedded and flight software (bac-software)    | Apache-2.0     |
+| Ground segment (BAC Ground)                    | AGPL-3.0       |
+| Tools and other standalone software (bac-utils, CLIs, notebooks) | MIT License |
 | Documentation                                  | CC BY-SA 4.0   |
 | Brand marks (name, logo, wordmark, lockup)     | Not openly licensed – BAC Trademark Policy |
 
+bac-software is Apache-2.0 (decided 2026-11-01, bac-software #194) because Zephyr and F Prime are, and files derived from them – board definitions, the F Prime deployment scaffold, drivers written for upstream – keep that license and their upstream copyright notices. Every source file in bac-software carries two header lines, `Copyright (c) <year> nihil.space GmbH and Build a CubeSat contributors` and `SPDX-License-Identifier: Apache-2.0`, in the Zephyr style with no license paragraph; the repository follows the REUSE specification and `reuse lint` runs in CI, so a file without a tag or a tag without a license text fails the build.
+
 The BAC Marks – the name Build a CubeSat, the abbreviation BAC, the cube mark, the wordmark and their lockup – are excluded from all three licenses, also where they appear inside an openly licensed repository or file; their use by others follows the BAC Trademark Policy (https://github.com/buildacubesat/bac-design/blob/main/guides/bac-trademark-policy.md; nihil.space GmbH, hello@buildacubesat.space). A repository that ships logo artwork says so in its README's license section: "The Build a CubeSat name and logo are not covered by this repository's licenses; see the BAC Trademark Policy."
 
-Documentation follows what it describes (decided 2026-10-29). A README, release note or instruction file that belongs to a design – a board, a part, a tool – travels with the design under its repository's license: a board README in bac-hardware is CERN OHL-S 2.0, a tool README in bac-utils is MIT. Standalone prose – bac-docs, the guides, the engineering documents in bac-software (BAC-FSW-\*, BAC-SBC-\*) – is CC BY-SA 4.0. A repository that holds both states the split once in its README and carries both license texts; bac-software keeps LICENSE (MIT) and adds LICENSE-CC-BY-SA-4.0.
+Documentation follows what it describes (decided 2026-10-29). A README, release note or instruction file that belongs to a design – a board, a part, a tool – travels with the design under its repository's license: a board README in bac-hardware is CERN OHL-S 2.0, a tool README in bac-utils is MIT. Standalone prose – bac-docs, the guides, the engineering documents in bac-software (BAC-FSW-\*, BAC-SBC-\*) – is CC BY-SA 4.0. A repository that holds both states the split once in its README and carries both license texts; bac-software carries LICENSE (Apache-2.0) and LICENSE-CC-BY-SA-4.0.
 
 Older releases keep the license they were published under unless they have been explicitly relicensed; the license a release declares is authoritative. bac-hardware carries only the CERN OHL-S 2.0 text, because boards released under CC BY-SA 4.0 leave the repository with the yearly January archive; a board still in the repository under CC BY-SA 4.0 says so in its README. bac-structure was relicensed as a whole on 2026-10-24: every structure release, including those first published under CC BY-SA 4.0, is CERN OHL-S 2.0, which is possible because no one outside nihil.space GmbH holds copyright in a structure design. Copies downloaded before then stay usable under CC BY-SA 4.0.
 
-The copyright holders are named as Copyright (c) \<years\> nihil.space GmbH and Build a CubeSat contributors (decided 2026-10-29), where \<years\> runs from the repository's first publication to its latest change, for example 2024–2026. bac-software carries the line in its MIT LICENSE, where the license text has a place for it; bac-hardware, bac-structure and bac-docs carry it in their README's license section, because the CERN OHL-S and CC BY-SA texts have none. The repositories on GitHub – bac-design, bac-utils and bac-page – keep their existing nihil.space GmbH line. bac-ops, the private operations data, is not open and stays "Copyright nihil.space GmbH. All rights reserved." CubeSat-Resources is dedicated to the public domain under CC0, which waives copyright; whether its CC0 statement names nihil.space GmbH is still open.
+The copyright holders are named as Copyright (c) \<years\> nihil.space GmbH and Build a CubeSat contributors (decided 2026-10-29), where \<years\> runs from the repository's first publication to its latest change, for example 2024–2026. bac-software, bac-hardware, bac-structure and bac-docs carry it in their README's license section, because the Apache-2.0, CERN OHL-S and CC BY-SA texts have no place for it; bac-software repeats it in every file header. bac-software has no NOTICE file: Apache-2.0 §4(d) makes one an obligation for every redistributor, and nothing in the repository needs to propagate that way. The repositories on GitHub – bac-design, bac-utils and bac-page – keep their existing nihil.space GmbH line. bac-ops, the private operations data, is not open and stays "Copyright nihil.space GmbH. All rights reserved." CubeSat-Resources is dedicated to the public domain under CC0, which waives copyright; whether its CC0 statement names nihil.space GmbH is still open.
 
 Every board carries its bac.page link – on the silkscreen and in its schematic, layout, README and release. That link is the Source Location that CERN OHL-S 2.0 asks for when hardware is conveyed as a product, so a new design gets its link before its first release (hardware release checklist, step 11).
 
-Include the appropriate SPDX identifier in every pyproject.toml:
+Include the repository's SPDX identifier in every pyproject.toml:
 
 ```text
-license = { text = "MIT" }
+license = { text = "MIT" }          # bac-utils and other standalone tools
+license = { text = "Apache-2.0" }   # packages inside bac-software
 ```
 
 ### 2.2 Versioning
@@ -528,6 +533,8 @@ build-backend = "hatchling.build"
 
 - Tool names use the bac- prefix.
 
+- The license field follows the repository (Section 2.1): MIT in bac-utils, Apache-2.0 for a package inside bac-software.
+
 - Python package names use underscores (bac_toolname); CLI entry points use hyphens (bac-toolname).
 
 - Always pin minimum version bounds on dependencies; avoid upper bounds.
@@ -950,7 +957,7 @@ Values are right-aligned by Blender's default prop() rendering. Do not override 
 
 ## 7. Quick Reference – The Non-Negotiables
 
-1.  Hardware, mechanical parts included: CERN OHL-S 2.0. Software: MIT. Documentation: CC BY-SA 4.0, except READMEs and instructions that belong to a design, which follow its repository. The BAC name and marks are excluded and follow the BAC Trademark Policy. Copyright: nihil.space GmbH and Build a CubeSat contributors.
+1.  Hardware, mechanical parts included: CERN OHL-S 2.0. Software follows the repository: bac-software Apache-2.0, BAC Ground AGPL-3.0, bac-utils and standalone tools MIT. Documentation: CC BY-SA 4.0, except READMEs and instructions that belong to a design, which follow its repository. The BAC name and marks are excluded and follow the BAC Trademark Policy. Copyright: nihil.space GmbH and Build a CubeSat contributors.
 
 2.  Physical hardware uses v\<version\>r\<revision\>\[.\<patch\>\]\[-\<variant\>\]; software uses SemVer with v in display output.
 
@@ -984,6 +991,7 @@ Values are right-aligned by Blender's default prop() rendering. Do not override 
 
 | **Version** | **Date** | **Change** |
 |------------|-------------|-----------------------------------------------------------------|
+| 0.18        | 2026-11-01 | Section 2.1: software licensed per repository (decided 2026-11-01, bac-software #194) – bac-software Apache-2.0, BAC Ground AGPL-3.0, bac-utils and standalone tools MIT; the license-follows-the-repository rule; files derived from Zephyr or F Prime keep their upstream license and notices; two-line file headers, REUSE and reuse lint in CI for bac-software; the copyright line moves from bac-software's LICENSE to its README and file headers; no NOTICE file; the pyproject.toml license field per repository. Section 3.10: the license field follows Section 2.1. Section 7: item 1 follows. |
 | 0.17        | 2026-10-30 | Section 2.8: bac-ops moved from Codeberg to GitHub (still private); GitHub described as the tooling and design side, five repositories. Section 2.1: the bac-ops copyright sentence no longer names a forge. Section 7: item 7 follows. |
 | 0.16        | 2026-10-29 | The governance alignment of the 2026-10-24 docs stock-take. Section 2.1: mechanical parts and bac-structure named under CERN OHL-S 2.0; documentation follows the design it describes, standalone prose is CC BY-SA 4.0, bac-software adds LICENSE-CC-BY-SA-4.0; the legacy-license clause, bac-hardware's single license text and the bac-structure relicense; the copyright line for the Codeberg repositories, the GitHub repositories keeping their nihil.space GmbH line, bac-ops all rights reserved; the bac.page link as Source Location. Section 2.2: merge commits (--no-ff), never squash, never rebase a tagged branch, replacing fast-forward; the BAC-FSW and BAC-SBC documents keep their own versions. Section 2.3: nihil.space GmbH only, the LLC a registered alias. Section 2.4: docs.buildacubesat.space. Sections 2.5, 4.3, 5.1 and 6: Title Case everywhere, the Blender and marimo exceptions retired. Section 2.6: no trailing period on subsection numbers. Section 2.7: YAML for mkdocs.yml and workflow files. Section 2.8: bac-design holds the guides, the checklists and PDF exports; bac-ops, private, in the Codeberg table. Section 2.9: the SKU examples in lowercase, 1u5 for a fractional form factor. New Section 2.11: status labels. Section 6: docs-site pages without a versioned subject take their history from git; American spelling. Section 7: items 1 and 7 updated, items 14 and 15. American spelling throughout. Code blocks: sixteen left as Google Docs code-block markers (U+EC03/U+EC02) fenced as Markdown. |
 | 0.15        | 2026-10-27 | The design rebase of Identity Guide 1.0 and Interface Design Guide 1.0 carried into tooling. Section 2.5: tokens.json in bac-utils is the executable token source; bac-design-tokens writes the gallery's and the bac-suite's tokens.css, the Rich colors and the marimo style cells, --check fails CI on a stale copy, and other repositories such as BAC Ground take a copy of the generated tokens.css. Section 2.8: the bac-utils row names the design tokens. Section 3.4: bac_common.ui's colors are generated – \#3FB950, \#E94538, \#F7D400. Section 3.8: the error rendering in the new red. Section 4.3: the canonical style cell rewritten – \#F9F9F9/#1F1E1D, \#3F3F3F/#E5E5E5, \#6D6D6D/#A9A8A6, Nunito Sans body and 500 headings, IBM Plex Mono for code only, 10px callouts – generated rather than copied; the stale third correction about .vega-embed removed (the rule left the notebooks on 2026-10-24). Section 4.5: chart text takes marimo's chart theme; the shared notebook palette and the new MUTED pair, both generated. Section 7: item 10 names the generated copies. Section 2.1 and Section 7: the BAC Marks are excluded from the open licenses and follow the new BAC Trademark Policy 1.0; repositories that ship logo artwork say so in their README. Section 2.8: the guides move to github.com/buildacubesat/bac-design. |

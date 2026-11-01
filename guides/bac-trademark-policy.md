@@ -1,6 +1,6 @@
 # BAC Trademark Policy
 
-**Build a CubeSat – use of the BAC name and marks** Version 1.2, 2026-10-29
+**Build a CubeSat – use of the BAC name and marks** Version 1.3, 2026-11-01
 
 **Trademark holder:** nihil.space GmbH, Bern, Switzerland  
 **Contact for permissions:** hello@buildacubesat.space
@@ -29,7 +29,7 @@ This policy does not claim exclusive rights over ordinary descriptive uses of th
 The project's hardware, software, and documentation remain governed by their respective licenses:
 
 - **Hardware:** CERN OHL-S 2.0;
-- **Software:** MIT License;
+- **Software:** Apache License 2.0 (bac-software), AGPL-3.0 (BAC Ground), MIT License (bac-utils and standalone tools);
 - **Documentation:** CC BY-SA 4.0.
 
 Unless explicitly stated otherwise for an individual asset, the BAC Marks and their artwork are **excluded from those open-source and Creative Commons license grants**, including where they appear inside an openly licensed repository, document or design file. Copyright in the original logo artwork is reserved by nihil.space GmbH. The BAC Marks may be used only as described in this policy, under a separate written permission, or as otherwise permitted by applicable law.
@@ -108,6 +108,7 @@ The BAC governance guides are independently versioned; this policy joins them at
 
 | **Version** | **Date** | **Change** |
 |----|----|----|
+| 1.3 | 2026-11-01 | §3: software licenses listed per repository – bac-software Apache-2.0, BAC Ground AGPL-3.0, bac-utils and standalone tools MIT (Project & Tooling Guide 0.18). |
 | 1.2 | 2026-10-29 | §2: the Rocinante marks named among the BAC Marks. Headings to Title Case and American spelling throughout. |
 | 1.1 | 2026-10-27 | §2: the marks named as the Identity Guide 1.1 and the asset files do – symbol, wordmark and logo (the horizontal lockup); no stacked lockup. §3: the official files in bac-design `assets/`. |
 | 1.0 | 2026-10-27 | First version, drafted by Mänu: the BAC Marks (name, abbreviation, cube mark, wordmark and lockup) excluded from the CERN OHL-S 2.0, MIT and CC BY-SA 4.0 grants; uses allowed without permission, uses needing written permission, uses not permitted; guidance for independent manufacturers; logo presentation; nihil.space GmbH as trademark holder, hello@buildacubesat.space for requests. Referenced from the Identity Guide 1.0, the Interface Design Guide 1.0 and the Project & Tooling Guide 0.15. |
