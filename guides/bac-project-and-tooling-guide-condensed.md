@@ -1,10 +1,10 @@
 # BAC Guide Rules – Condensed Checklist for Reviewing Utils
 
-- Source: BAC Project & Tooling Guide v0.18 (2026-11-01), BAC Interface Design Guide v1.1 (2026-10-29), BAC Identity Guide v1.4 (2026-10-30) and BAC Trademark Policy v1.3 (2026-11-01).
+- Source: BAC Project & Tooling Guide v0.19 (2026-11-03), BAC Interface Design Guide v1.1 (2026-10-29), BAC Identity Guide v1.4 (2026-10-30) and BAC Trademark Policy v1.3 (2026-11-01).
 
 ## Project-Wide
 
-- License follows the repository: bac-software Apache-2.0 (two-line file headers, reuse lint in CI); BAC Ground AGPL-3.0; bac-utils and standalone tools MIT, pyproject.toml has license = { text = "MIT" }. Hardware CERN OHL-S 2.0, mechanical parts and bac-structure included. Docs CC BY-SA 4.0, except READMEs and instructions that belong to a design, which follow its repository. Copyright line: Copyright (c) \<years\> nihil.space GmbH and Build a CubeSat contributors on the open Codeberg repositories; the GitHub repositories keep their nihil.space GmbH line; bac-ops (private) is all rights reserved.
+- License follows the repository: bac-software Apache-2.0 (SPDX line in every file, copyright in REUSE.toml, reuse lint in pre-commit); BAC Ground AGPL-3.0; bac-utils and standalone tools MIT, pyproject.toml has license = { text = "MIT" }. Hardware CERN OHL-S 2.0, mechanical parts and bac-structure included. Docs CC BY-SA 4.0, except READMEs and instructions that belong to a design, which follow its repository. Copyright line: Copyright (c) \<years\> nihil.space GmbH and Build a CubeSat contributors on the open Codeberg repositories; the GitHub repositories keep their nihil.space GmbH line; bac-ops (private) is all rights reserved.
 
 - Legal entity: nihil.space GmbH only; never the LLC.
 - Brand marks (name, BAC, cube mark, wordmark, lockup) are not openly licensed: BAC Trademark Policy. A repository that ships logo artwork says so in its README's license section.
