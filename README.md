@@ -8,10 +8,11 @@ Build a CubeSat – the design guides: the normative text for the BAC identity, 
 | :-- | :-- | :-- |
 | [BAC Identity Guide](guides/bac-identity-guide.md) | 1.5 | Brand, voice, typography, color, form, imagery, the Ops and Mission modes |
 | [BAC Interface Design Guide](guides/bac-interface-design-guide.md) | 1.1 | Interaction, the five-state system, accessibility, components, data visualization, the terminal profile, physical indicators |
-| [BAC Project & Tooling Guide](guides/bac-project-and-tooling-guide.md) | 0.17 | Licensing, versioning, repositories, data formats, status labels, CLI and marimo implementation, documentation process |
+| [BAC Project & Tooling Guide](guides/bac-project-and-tooling-guide.md) | 0.20 | Licensing, contributions and sign-off, versioning, repositories, data formats, status labels, CLI and marimo implementation, documentation process |
 | [BAC Project & Tooling Guide – condensed](guides/bac-project-and-tooling-guide-condensed.md) | follows the three above | The checklist used when reviewing tools |
-| [BAC Trademark Policy](guides/bac-trademark-policy.md) | 1.2 | How others may use the Build a CubeSat and Rocinante names and marks |
-| [BAC Project Overview](guides/bac-project-overview.md) | 0.4 | What BAC is, its principles, architecture and open-source model; where authoritative detail lives |
+| [BAC Trademark Policy](guides/bac-trademark-policy.md) | 1.3 | How others may use the Build a CubeSat and Rocinante names and marks |
+| [BAC Code of Conduct](guides/bac-code-of-conduct.md) | 1.0 | How people treat each other in every BAC repository, on Discord and at events; how to report a problem |
+| [BAC Project Overview](guides/bac-project-overview.md) | 0.5 | What BAC is, its principles, architecture and open-source model; where authoritative detail lives |
 | [Rocinante / Roci Naming Note](guides/bac-rocinante-naming.md) | 0.2 | How the flight software stack is named in prose, code and documents |
 
 Each guide is independently versioned and carries its own version history. `guides/` holds the Markdown source and is what to read and edit. `exports/` holds a PDF of each guide for handing to people outside git. The PDFs follow Identity Guide §7.3 and are built Markdown → HTML → PDF by [`bac-design-export`](https://github.com/buildacubesat/bac-utils/tree/main/tools/bac-design-export) in bac-utils (`bac-design-export` from beside this checkout; `--check` reports a stale export). The Markdown is authoritative.
@@ -38,12 +39,18 @@ A change of meaning – a new rule, a retired token – is made here first; the 
 
 ## 5. License
 
-The guides and this README are licensed CC BY-SA 4.0. The Build a CubeSat name, the abbreviation BAC, the symbol, wordmark and logo are not: they are BAC Marks of nihil.space GmbH, and their use is governed by the [BAC Trademark Policy](guides/bac-trademark-policy.md). Describing a mark in a guide does not license it. The fonts in `fonts/` keep their SIL Open Font License 1.1. See `LICENSE.md`.
+The guides, the checklists, the templates and this README are licensed CC BY-SA 4.0. The Build a CubeSat name, the abbreviation BAC, the symbol, wordmark and logo are not, also where the templates carry them: they are BAC Marks of nihil.space GmbH, and their use is governed by the [BAC Trademark Policy](guides/bac-trademark-policy.md). Describing a mark in a guide does not license it. The fonts in `fonts/` keep their SIL Open Font License 1.1. See `LICENSE.md`.
 
-## 6. Version History
+## 6. Contributing
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md): changes land on a feature branch, and every commit is signed off under the Developer Certificate of Origin (`git commit -s`), which a check on each pull request enforces. Everyone in BAC's spaces follows the [BAC Code of Conduct](guides/bac-code-of-conduct.md); `CODE_OF_CONDUCT.md` points to it.
+
+## 7. Version History
 
 | Version | Date | Change |
 | :-- | :-- | :-- |
+| 1.5.0 | 2026-11-11 | The BAC Code of Conduct 1.0 in `guides/` (adapted from Contributor Covenant 3.0) and in the guide table. Project & Tooling Guide 0.20 (§2.12: no CLA, DCO sign-off, inbound equals outbound) and Project Overview 0.5. `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md` and the DCO check in `.github/workflows/dco.yml`; new §6 Contributing. `LICENSE.md` names the new files. |
+| 1.4.3 | 2026-11-03 | Project & Tooling Guide 0.19 and Trademark Policy 1.3 in the guide table (software licensed per repository, bac-software Apache-2.0). §5 and `LICENSE.md`: the checklists and templates named under CC BY-SA 4.0, the marks in the templates excluded. |
 | 1.4.2 | 2026-10-30 | Identity Guide 1.5: the gallery symbol in §10. This README restored after the 1.4.1 merge carried the 1.3.0 version back. |
 | 1.4.1 | 2026-10-30 | Project & Tooling Guide 0.17: bac-ops on GitHub. |
 | 1.4.0 | 2026-10-30 | `templates/`: the slides template at v1r2 (Mission surfaces, the nebula, timeline and quote reworked). `exports/`: the seven guides rebuilt by `bac-design-export` 0.1.0 as BAC documents (A4, Nunito Sans and IBM Plex Mono embedded), replacing the pandoc → docx → LibreOffice exports. Identity Guide 1.4 (§7.2 slides v1r2, §7.3 documents, the tagline as "Space for everyone."). Project & Tooling Guide: sixteen code blocks left as Google Docs markers fenced as Markdown. |
