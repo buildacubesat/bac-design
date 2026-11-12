@@ -1,6 +1,6 @@
 # BAC Code of Conduct
 
-**Build a CubeSat – how we treat each other in the project's spaces** Version 1.0, 2026-11-11
+**Build a CubeSat – how we treat each other in the project's spaces** Version 1.1, 2026-11-12
 
 **Applies to:** every Build a CubeSat repository, the BAC Discord server, BAC events and official BAC channels  
 **Reports:** conduct@buildacubesat.space – reaches the two conduct contacts (§7)
@@ -55,7 +55,7 @@ We agree to restrict the following behaviors in our community. Instances, threat
 This code applies in all of BAC's community spaces:
 
 - the BAC repositories on Codeberg and GitHub – issues, pull requests, reviews, commit messages and discussions;
-- the BAC Discord server – its channels, threads and voice channels, and direct messages between members that start there;
+- the BAC Discord server (https://bac.page/discord) – its channels, threads and voice channels, and direct messages between members that start there;
 - events BAC organizes or takes part in as BAC – workshops, talks, launches and meetups, online or in person;
 - official BAC accounts, email addresses and channels.
 
@@ -68,7 +68,7 @@ Tensions can occur between community members even when they are trying their bes
 When an incident does occur, it is important to report it promptly:
 
 - **Write to conduct@buildacubesat.space.** The address reaches the two conduct contacts (§7) and no one else.
-- **If the report concerns one of the conduct contacts**, send it to the other directly: to Gui at martinho.ito@gmail.com for a report about Manuel, to Manuel at compliance@buildacubesat.space for a report about Gui. A direct message on the BAC Discord server works too.
+- **If the report concerns one of the conduct contacts**, send it to the other directly: to Gui at martinho.ito@gmail.com for a report about Manuel, to Manuel at compliance@nihil.space for a report about Gui. A direct message on the BAC Discord server works too.
 - **For something on Discord that needs stopping now** – a message to take down, spam, a raid – also tell a Discord moderator. They can act at once and pass the report on.
 
 Say what happened, where and when, and who was involved, and link or attach what you have – messages, screenshots, issue or pull request links. You can also report something that happened to someone else.
@@ -125,4 +125,5 @@ The BAC governance guides are independently versioned; this code joins them at 1
 
 | **Version** | **Date** | **Change** |
 |----|----|----|
+| 1.1 | 2026-11-12 | §5 links the Discord server as https://bac.page/discord. §6: Manuel's direct address for reports about Gui is compliance@nihil.space, the address of nihil.space GmbH, which reaches him alone. |
 | 1.0 | 2026-11-11 | First version: one code of conduct for all of BAC, adapted from Contributor Covenant 3.0. Scope: the repositories on Codeberg and GitHub, the Discord server, events and official channels. Reports to conduct@buildacubesat.space; Manuel and Gui as the conduct contacts, each reachable directly by email or Discord when a report concerns the other; Discord moderators named by role, listed in the server's rules channel. Consequences apply in every BAC space. Linked from `CODE_OF_CONDUCT.md` in every BAC repository (Project & Tooling Guide 0.20, §2.12). |

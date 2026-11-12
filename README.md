@@ -11,7 +11,7 @@ Build a CubeSat – the design guides: the normative text for the BAC identity, 
 | [BAC Project & Tooling Guide](guides/bac-project-and-tooling-guide.md) | 0.20 | Licensing, contributions and sign-off, versioning, repositories, data formats, status labels, CLI and marimo implementation, documentation process |
 | [BAC Project & Tooling Guide – condensed](guides/bac-project-and-tooling-guide-condensed.md) | follows the three above | The checklist used when reviewing tools |
 | [BAC Trademark Policy](guides/bac-trademark-policy.md) | 1.3 | How others may use the Build a CubeSat and Rocinante names and marks |
-| [BAC Code of Conduct](guides/bac-code-of-conduct.md) | 1.0 | How people treat each other in every BAC repository, on Discord and at events; how to report a problem |
+| [BAC Code of Conduct](guides/bac-code-of-conduct.md) | 1.1 | How people treat each other in every BAC repository, on Discord and at events; how to report a problem |
 | [BAC Project Overview](guides/bac-project-overview.md) | 0.5 | What BAC is, its principles, architecture and open-source model; where authoritative detail lives |
 | [Rocinante / Roci Naming Note](guides/bac-rocinante-naming.md) | 0.2 | How the flight software stack is named in prose, code and documents |
 
@@ -49,6 +49,7 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md): changes land on a feature branch, and 
 
 | Version | Date | Change |
 | :-- | :-- | :-- |
+| 1.5.1 | 2026-11-12 | BAC Code of Conduct 1.1 in the guide table: the Discord link in §5, Manuel's direct address on nihil.space in §6. |
 | 1.5.0 | 2026-11-11 | The BAC Code of Conduct 1.0 in `guides/` (adapted from Contributor Covenant 3.0) and in the guide table. Project & Tooling Guide 0.20 (§2.12: no CLA, DCO sign-off, inbound equals outbound) and Project Overview 0.5. `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md` and the DCO check in `.github/workflows/dco.yml`; new §6 Contributing. `LICENSE.md` names the new files. |
 | 1.4.3 | 2026-11-03 | Project & Tooling Guide 0.19 and Trademark Policy 1.3 in the guide table (software licensed per repository, bac-software Apache-2.0). §5 and `LICENSE.md`: the checklists and templates named under CC BY-SA 4.0, the marks in the templates excluded. |
 | 1.4.2 | 2026-10-30 | Identity Guide 1.5: the gallery symbol in §10. This README restored after the 1.4.1 merge carried the 1.3.0 version back. |
