@@ -1,10 +1,10 @@
 # BAC Project & Tooling Guide
 
-**Build a CubeSat – project, software and tooling standard.** Version 0.19, 2026-11-03
+**Build a CubeSat – project, software and tooling standard.** Version 0.20, 2026-11-11
 
 This document defines engineering, software, repository, data, and implementation conventions used across the BAC project. It is the primary reference for LLMs and human contributors when creating or updating project tooling and technical workflows. The goal is consistency, not uniformity – each tool context has its own implementation constraints, but project conventions remain predictable and maintainable.
 
-Relationship to the BAC Identity and Interface guides. The BAC Identity Guide is authoritative for brand and communication identity, canonical visual tokens, typography, imagery, and Ops/Mission modes. The BAC Interface Design Guide is authoritative for interface behavior, semantic state application, accessibility, components, data visualization, feedback and progress, terminal presentation, and physical indicators. This Project & Tooling Guide is authoritative for licensing, versioning, code and file conventions, URLs and repositories, data formats, SKUs, time reference, CLI implementation, config and secrets, marimo implementation, Blender extensions, and documentation process. Where implementation needs a visual or interface value, reference the upstream guide rather than creating a local variant. The BAC Trademark Policy governs how others may use the BAC name and marks; this guide's licensing table (Section 2.1) points to it.
+Relationship to the BAC Identity and Interface guides. The BAC Identity Guide is authoritative for brand and communication identity, canonical visual tokens, typography, imagery, and Ops/Mission modes. The BAC Interface Design Guide is authoritative for interface behavior, semantic state application, accessibility, components, data visualization, feedback and progress, terminal presentation, and physical indicators. This Project & Tooling Guide is authoritative for licensing, versioning, code and file conventions, URLs and repositories, data formats, SKUs, time reference, CLI implementation, config and secrets, marimo implementation, Blender extensions, and documentation process. Where implementation needs a visual or interface value, reference the upstream guide rather than creating a local variant. The BAC Trademark Policy governs how others may use the BAC name and marks; this guide's licensing table (Section 2.1) points to it. The BAC Code of Conduct governs how people treat each other in the project's spaces; Section 2.12 makes every repository link it.
 
 ## 1. Core Values
 
@@ -24,7 +24,7 @@ These apply across all tool types.
 
 ### 2.1 Licensing
 
-Every BAC artifact is licensed as follows. The license follows the repository, not the directory: a file takes the license of the repository it lives in. Do not deviate.
+Every BAC artifact is licensed as follows. The license follows the repository, not the directory: a file takes the license of the repository it lives in. Contributions come in under the same license (Section 2.12). Do not deviate.
 
 | **Artifact type**                              | **License**    |
 |------------------------------------------------|----------------|
@@ -248,7 +248,7 @@ GitHub is secondary. It holds the tooling and design side – the projects that 
 | github.com/buildacubesat/CubeSat-Resources | CubeSat Resources website                                                                                              |
 | github.com/buildacubesat/bac-page          | URL shortener (GitHub Pages); bac.page until 2026-10, the old name redirects                                           |
 | github.com/buildacubesat/bac-utils         | BAC tools, shared libraries, engineering notebooks, the operations suite, the Blender extension and the design tokens (tokens.json and bac-design-tokens; GitHub Actions CI) |
-| github.com/buildacubesat/bac-design        | The BAC guides, the Trademark Policy and the project checklists as Markdown with PDF exports, the brand assets, fonts and templates; the normative text the tokens and tools follow |
+| github.com/buildacubesat/bac-design        | The BAC guides, the Trademark Policy, the Code of Conduct and the project checklists as Markdown with PDF exports, the brand assets, fonts and templates; the normative text the tokens and tools follow |
 | github.com/buildacubesat/bac-ops           | Operations data: price breaks, vendor quotes, margins (private; read and written by the bac-utils ops tools) |
 
 When a tool needs to reference a repo URL, link to Codeberg by default. Use GitHub URLs only for the five repos that are hosted there.
@@ -307,6 +307,20 @@ Every board and part in a README index, a release table or a docs page carries o
 | `EXTERNAL`    | Third-party item; no design files in BAC                                 | Information       |
 
 bac-hardware and bac-structure use the same labels. A status the table does not cover is a reason to change the table here, not to invent a label in a README.
+
+### 2.12 Contributions and Conduct
+
+BAC asks for no contributor license agreement (decided 2026-11-11). Contributors sign off every commit under the Developer Certificate of Origin 1.1 (https://developercertificate.org/) with `git commit -s`, keep the copyright in their work, and license it under the license that Section 2.1 sets for the part they change – inbound equals outbound. Nothing is relicensed and nothing else is signed.
+
+Every BAC repository carries three files, and a new repository starts with them:
+
+| **File**             | **Content**                                                                                                  |
+|----------------------|--------------------------------------------------------------------------------------------------------------|
+| `CODE_OF_CONDUCT.md` | A short pointer to the BAC Code of Conduct in bac-design and the reporting address, conduct@buildacubesat.space |
+| `CONTRIBUTING.md`    | The repository's workflow and a Developer Certificate of Origin section: what sign-off means, `git commit -s`, the repository's license, how to sign off a pushed branch |
+| The DCO check        | `.github/workflows/dco.yml` on GitHub, `.forgejo/workflows/dco.yaml` on Codeberg                              |
+
+The DCO check runs on every pull request and fails on a commit without a `Signed-off-by` line whose address matches the commit's author; merge commits and bot commits are skipped. It is one workflow with one inline script on both forges – no third-party app. The two copies differ in the runner – `ubuntu-latest` on GitHub, Codeberg's hosted `codeberg-tiny` on Codeberg, so it doesn't depend on the self-hosted runner, which serves bac-software only – and in the job token: on GitHub the fetch uses it, so the check also works in private repositories such as bac-ground, while the public Codeberg repositories fetch without it. It fetches commit objects only, without trees or blobs, so it stays within `codeberg-tiny`'s limits whatever the repository's size. Codeberg disables Actions per repository by default; enable them under Settings → Units. Make the check required where the forge's branch protection allows.
 
 ## 3. Command-Line Applications
 
@@ -937,7 +951,7 @@ Values are right-aligned by Blender's default prop() rendering. Do not override 
 
 ## 6. Documentation and Governance Conventions
 
-- Governance guides are independently versioned. The guides in bac-design – the BAC Identity Guide, BAC Interface Design Guide, BAC Project & Tooling Guide, BAC Trademark Policy, BAC Project Overview and the Rocinante naming note – carry their own version numbers because they govern multiple artifacts.
+- Governance guides are independently versioned. The guides in bac-design – the BAC Identity Guide, BAC Interface Design Guide, BAC Project & Tooling Guide, BAC Trademark Policy, BAC Code of Conduct, BAC Project Overview and the Rocinante naming note – carry their own version numbers because they govern multiple artifacts.
 
 - Product, subsystem and software documentation follows its subject's version. A README or user guide names the version of the thing it documents and does not create an unrelated document version number. The engineering documents in bac-software keep their own versions (Section 2.2).
 
@@ -987,10 +1001,13 @@ Values are right-aligned by Blender's default prop() rendering. Do not override 
 
 15. Title Case headings, American spelling, no emoji; status is one of the labels in Section 2.11.
 
+16. No CLA: every commit is signed off under the DCO (git commit -s), contributions keep their author's copyright and come in under the repository's license; every repository carries CODE_OF_CONDUCT.md, CONTRIBUTING.md and the DCO check.
+
 ## 8. Version History
 
 | **Version** | **Date** | **Change** |
 |------------|-------------|-----------------------------------------------------------------|
+| 0.20        | 2026-11-11 | New Section 2.12: no CLA; commits signed off under the DCO 1.1, contributors keep their copyright, inbound equals outbound (decided 2026-11-11); every repository carries CODE_OF_CONDUCT.md, CONTRIBUTING.md with a DCO section, and the DCO check workflow. Section 2.1: contributions come in under the repository's license. Introduction and Section 6: the BAC Code of Conduct 1.0 among the guides. Section 7: item 16. |
 | 0.19        | 2026-11-03 | Section 2.1: bac-software files carry the SPDX line only; the copyright statement is set once in REUSE.toml (decided 2026-11-03); reuse lint runs as a pre-commit hook. |
 | 0.18        | 2026-11-01 | Section 2.1: software licensed per repository (decided 2026-11-01, bac-software #194) – bac-software Apache-2.0, BAC Ground AGPL-3.0, bac-utils and standalone tools MIT; the license-follows-the-repository rule; files derived from Zephyr or F Prime keep their upstream license and notices; two-line file headers, REUSE and reuse lint in CI for bac-software; the copyright line moves from bac-software's LICENSE to its README and file headers; no NOTICE file; the pyproject.toml license field per repository. Section 3.10: the license field follows Section 2.1. Section 7: item 1 follows. |
 | 0.17        | 2026-10-30 | Section 2.8: bac-ops moved from Codeberg to GitHub (still private); GitHub described as the tooling and design side, five repositories. Section 2.1: the bac-ops copyright sentence no longer names a forge. Section 7: item 7 follows. |

@@ -1,6 +1,6 @@
 # Build a CubeSat – Project Overview
 
-**Build a CubeSat – Consolidated project reference** Version 0.4, 2026-10-29
+**Build a CubeSat – Consolidated project reference** Version 0.5, 2026-11-11
 
 > **Space for everyone.** This document is the durable orientation reference for Build a CubeSat (BAC): what the project is, why it exists, how its major parts fit together, how it relates to nihil.space, and where authoritative detail lives.
 
@@ -12,7 +12,7 @@ This overview synthesizes the project but is not the authority for specialist ru
 
 2.  **BAC Interface Design Guide** – interface behavior, accessibility, interaction, semantic states, data visualization, terminal presentation, and physical indicators.
 
-3.  **BAC Project & Tooling Guide** – licensing, versioning, repositories, data formats, SKUs, CLI implementation, configuration and secrets, Marimo structure, Blender extensions, and project-wide engineering conventions. The **BAC Trademark Policy** governs how others may use the BAC name and marks, and the **Rocinante naming note** how the flight software stack is named.
+3.  **BAC Project & Tooling Guide** – licensing, versioning, repositories, data formats, SKUs, CLI implementation, configuration and secrets, Marimo structure, Blender extensions, and project-wide engineering conventions. The **BAC Trademark Policy** governs how others may use the BAC name and marks, the **BAC Code of Conduct** how people treat each other in the project's spaces, and the **Rocinante naming note** how the flight software stack is named.
 
     These guides live in bac-design (https://github.com/buildacubesat/bac-design).
 
@@ -177,13 +177,13 @@ Canonical licensing is defined in the **BAC Project & Tooling Guide**. At projec
 | **Artifact**  | **License**                                                                  |
 |---------------|------------------------------------------------------------------------------|
 | Hardware      | CERN OHL-S 2.0, mechanical parts included                                    |
-| Software      | MIT                                                                          |
+| Software      | Apache-2.0 (bac-software), AGPL-3.0 (BAC Ground), MIT (bac-utils and standalone tools) |
 | Documentation | CC BY-SA 4.0; READMEs and instructions that belong to a design follow its repository |
 | Brand marks   | Not openly licensed – BAC Trademark Policy                                   |
 
 Older hardware may retain the license under which it was originally released unless it has been explicitly relicensed, as all bac-structure releases were in 2026-10. The license declared by the artifact or repository is authoritative.
 
-Contributors retain their work under the applicable project license rather than assigning ownership simply to participate. The objective is a genuinely extendable ecosystem in which new boards, tools and improvements can exist both in core BAC repositories and in contributor-owned projects that implement BAC interfaces.
+Contributors retain their work under the applicable project license rather than assigning ownership simply to participate: there is no contributor license agreement, only a sign-off under the Developer Certificate of Origin, and a contribution comes in under the license it goes out under. The objective is a genuinely extendable ecosystem in which new boards, tools and improvements can exist both in core BAC repositories and in contributor-owned projects that implement BAC interfaces.
 
 ## 9. Community, Documentation and Education
 
@@ -200,6 +200,8 @@ Key public surfaces include:
 - **CubeSat Resources**, a related curated collection of learning material;
 
 - project documentation and release artifacts intended to make the hardware reproducible rather than merely viewable.
+
+Everyone in these spaces follows the **BAC Code of Conduct**.
 
 Contribution is encouraged at more than one level. Focused fixes and improvements can land directly in core repositories; independent modules, tooling and experiments can remain in contributor-owned repositories while still becoming part of the wider BAC ecosystem through documented interfaces.
 
@@ -285,6 +287,7 @@ None of these are necessarily unimportant. They are simply better maintained in 
 | Rocinante architecture and implementation                            | bac-software repository and SDDs |
 | Documentation                                                        | bac-docs repository, docs.buildacubesat.space |
 | Use of the BAC name and marks                                        | **BAC Trademark Policy**         |
+| Conduct in the project's spaces and how to report a problem          | **BAC Code of Conduct**          |
 | Flight software naming                                               | Rocinante naming note            |
 | Current products, prices and availability                            | buildacubesat.space              |
 | Public short links                                                   | bac.page                         |
@@ -305,6 +308,7 @@ That is the durable roadmap.
 
 | **Version** | **Date**   | **Change**                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 |-------------|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 0.5         | 2026-11-11 | §0, §9, §13: the BAC Code of Conduct among the guides. §8: software licensed per repository – bac-software Apache-2.0, BAC Ground AGPL-3.0, bac-utils and standalone tools MIT (Project & Tooling Guide 0.18), replacing MIT for all software; no CLA, a DCO sign-off with inbound equals outbound (Project & Tooling Guide 0.20). |
 | 0.4         | 2026-10-29 | Moved from Google Drive into bac-design `guides/`. The slogan shortened to "Space for everyone". §0: the Trademark Policy and the Rocinante naming note among the guides, which live in bac-design. §1, §10: nihil.space GmbH as the legal entity. §5.1: the MicroMod carrier serves small and medium nodes. §8: mechanical parts under CERN OHL-S 2.0, documentation follows the design it describes, the marks excluded, the bac-structure relicense. §13: the docs site, the Trademark Policy and the naming note. Headings to Title Case and American spelling throughout. |
 | 0.3         | 2026-08-10 | Rewritten as a durable project overview rather than a consolidated status dump. Removed firm future dates, volatile release/commercial details, repository statistics, personal finance, contributor rosters, implementation-level factoids and the large conflict/TODO register. Reframed the roadmap as capability gates and program goals. Updated authority references to the BAC Identity Guide, BAC Interface Design Guide and BAC Project & Tooling Guide. |
 | 0.2         | 2026-07-23 | Consolidated corporate and project context and reconciled several source conflicts.                                                                                                                                                                                                                                                                                                                                                                                 |
