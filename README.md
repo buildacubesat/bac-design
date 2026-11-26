@@ -6,7 +6,7 @@ Build a CubeSat – the design guides: the normative text for the BAC identity, 
 
 | Guide | Version | Governs |
 | :-- | :-- | :-- |
-| [BAC Identity Guide](guides/bac-identity-guide.md) | 1.5 | Brand, voice, typography, color, form, imagery, the Ops and Mission modes |
+| [BAC Identity Guide](guides/bac-identity-guide.md) | 1.7 | Brand, voice, typography, color, form, imagery, the Ops and Mission modes |
 | [BAC Interface Design Guide](guides/bac-interface-design-guide.md) | 1.1 | Interaction, the five-state system, accessibility, components, data visualization, the terminal profile, physical indicators |
 | [BAC Project & Tooling Guide](guides/bac-project-and-tooling-guide.md) | 0.20 | Licensing, contributions and sign-off, versioning, repositories, data formats, status labels, CLI and marimo implementation, documentation process |
 | [BAC Project & Tooling Guide – condensed](guides/bac-project-and-tooling-guide-condensed.md) | follows the three above | The checklist used when reviewing tools |
@@ -29,7 +29,7 @@ A change of meaning – a new rule, a retired token – is made here first; the 
 
 ## 3. Brand Assets
 
-`assets/` holds the official Build a CubeSat symbol, wordmark and logo at v4r1 (plus the logo with tagline and the badges) and the Rocinante marks at v2r1, as black, white and `currentColor` SVG; [`assets/README.md`](assets/README.md) lists the files and their construction. They are BAC Marks under the Trademark Policy and are not covered by this repository's license. The files are written by [`bac-brand-assets`](https://github.com/buildacubesat/bac-utils/tree/main/tools/bac-brand-assets) in bac-utils from the construction the Identity Guide §8 states, never edited by hand.
+`assets/` holds the official Build a CubeSat symbol, wordmark and logo at v4r1 (plus the stacked logo, the tagline variants and their badges) and the Rocinante marks at v2r1, as black, white and `currentColor` SVG; [`assets/README.md`](assets/README.md) lists the files and their construction. They are BAC Marks under the Trademark Policy and are not covered by this repository's license. The files are written by [`bac-brand-assets`](https://github.com/buildacubesat/bac-utils/tree/main/tools/bac-brand-assets) in bac-utils from the construction the Identity Guide §8 states, never edited by hand.
 
 `fonts/` holds the self-hosted copies of the three families (Nunito, Nunito Sans, IBM Plex Mono; OFL 1.1) that offline surfaces and the tools use; see [`fonts/README.md`](fonts/README.md).
 
@@ -52,6 +52,7 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md): changes land on a feature branch, and 
 | 1.5.1 | 2026-11-12 | BAC Code of Conduct 1.1 in the guide table: the Discord link in §5, Manuel's direct address on nihil.space in §6. |
 | 1.5.0 | 2026-11-11 | The BAC Code of Conduct 1.0 in `guides/` (adapted from Contributor Covenant 3.0) and in the guide table. Project & Tooling Guide 0.20 (§2.12: no CLA, DCO sign-off, inbound equals outbound) and Project Overview 0.5. `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md` and the DCO check in `.github/workflows/dco.yml`; new §6 Contributing. `LICENSE.md` names the new files. |
 | 1.4.3 | 2026-11-03 | Project & Tooling Guide 0.19 and Trademark Policy 1.3 in the guide table (software licensed per repository, bac-software Apache-2.0). §5 and `LICENSE.md`: the checklists and templates named under CC BY-SA 4.0, the marks in the templates excluded. |
+| 1.5.0 | 2026-11-26 | `assets/`: the stacked logo and its badge (2026-11-19), the stacked logo with tagline and the tagline badges for both lockups, written by `bac-brand-assets` 0.4.0 and 0.5.1. Identity Guide 1.6 and 1.7 (§8). |
 | 1.4.2 | 2026-10-30 | Identity Guide 1.5: the gallery symbol in §10. This README restored after the 1.4.1 merge carried the 1.3.0 version back. |
 | 1.4.1 | 2026-10-30 | Project & Tooling Guide 0.17: bac-ops on GitHub. |
 | 1.4.0 | 2026-10-30 | `templates/`: the slides template at v1r2 (Mission surfaces, the nebula, timeline and quote reworked). `exports/`: the seven guides rebuilt by `bac-design-export` 0.1.0 as BAC documents (A4, Nunito Sans and IBM Plex Mono embedded), replacing the pandoc → docx → LibreOffice exports. Identity Guide 1.4 (§7.2 slides v1r2, §7.3 documents, the tagline as "Space for everyone."). Project & Tooling Guide: sixteen code blocks left as Google Docs markers fenced as Markdown. |
